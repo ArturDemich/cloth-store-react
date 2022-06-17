@@ -9,7 +9,7 @@ class NavBar extends React.Component {
     return (
       <Wrapper>
         <Navigation>
-          <Button> WOMEN </Button>
+          <Button as="button"> WOMEN </Button>
           <Button>MEN</Button>
           <Button>KIDS</Button>
         </Navigation>

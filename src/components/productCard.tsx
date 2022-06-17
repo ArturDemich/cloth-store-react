@@ -1,19 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Content, Price, Title, Wrapper } from "../styles/productCard.styles";
+import Image from "../styles/icon/Image.png";
 
 class ProductCard extends React.Component {
   render() {
     return (
-      <div>
-        <div>
-          Card1
-          <button>
-            <Link to="/product-description">Descrition</Link>
-          </button>
-        </div>
-        <div>Card2</div>
-        <div>Card3</div>
-      </div>
+      <Wrapper>
+        <Link to="/product-description">
+          <img src={Image} alt="image" />
+
+          <Content>
+            <Title>Name product</Title>
+            <Price>123.00</Price>
+          </Content>
+        </Link>
+      </Wrapper>
     );
   }
 }
