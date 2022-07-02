@@ -7,3 +7,9 @@ font-style: normal;
 padding-left: 3rem;
 padding-right: 3rem;
 `
+
+export const GridContainer = styled.div`
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+grid-auto-rows: 486px;
+`

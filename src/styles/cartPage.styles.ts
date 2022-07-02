@@ -5,9 +5,19 @@ export const Wrapper = styled.div`
 font-family: 'Raleway';
 font-style: normal;
 display: flex;
-flex-direction: row;
+flex-direction: column;
 padding-left: 4rem;
 padding-top: 2rem;
+`
+
+export const Title = styled.div`
+font-family: 'Raleway';
+font-style: normal;
+font-weight: 700;
+font-size: 32px;
+text-transform: uppercase;
+color: #1D1F22;
+margin-bottom: 1rem;
 `
 
 export const Button = styled.button`
@@ -15,8 +25,8 @@ display: flex;
 flex-direction: column;
 align-items: center;
 padding: 16px 32px;
-width: 292px;
-height: 52px;
+width: 279px;
+height: 43px;
 left: 929px;
 top: 560px;
 background: #5ECE7B;
@@ -28,7 +38,7 @@ font-size: 16px;
 line-height: 120%;
 color: #FFFFFF;
 text-transform: uppercase;
-margin-top: 2rem;
+margin-top: 1rem;
 `
 
 export const TextStrong = styled.div`
@@ -38,6 +48,16 @@ font-weight: 700;
 font-size: 18px;
 line-height: 18px;
 color: #1D1F22;
-padding-top: 2rem;
+padding-top: 1rem;
 text-transform: uppercase;
+`
+
+
+export const Infoblock = styled.div`
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+width: 279px;
+height: 159px;
 `

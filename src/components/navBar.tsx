@@ -4,9 +4,17 @@ import brandIcon from "../styles/icon/brandIcon.svg";
 import $$ from "../styles/icon/$$.svg";
 import emptyCart from "../styles/icon/emptyCart.svg";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { getCategoriesNameThunk } from "../storeg/thunks";
+import { Data } from "../storeg/dataSlice";
 
-class NavBar extends React.Component {
+class NavBar extends React.Component<any, any> {
+  componentDidMount() {
+    this.props.getCategoriesNameThunk();
+  }
+
   render() {
+    console.log("navBar", this.props.categoriesName[0]);
     return (
       <Wrapper>
         <Navigation>
@@ -27,4 +35,8 @@ class NavBar extends React.Component {
   }
 }
 
-export default NavBar;
+let mapStateToProps = (state: Data) => ({
+  categoriesName: state.categories,
+});
+
+export default connect(mapStateToProps, { getCategoriesNameThunk })(NavBar);
