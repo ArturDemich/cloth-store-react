@@ -1,24 +1,17 @@
-import { ApolloQueryResult } from '@apollo/client';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Categories, Category, Currency, Product } from './types';
-
-export type Data = {
-  categories: Categories
-  category: Category
-  product: Product[]
-  currencies: Currency[]
-};
+import { Categories, Category, CategoryName, Currency, Data, Product } from './interfaces';
 
 const initialState: Data = {
-  categories: {
-    name:[]
-  },
+  categories: [],
   product: [],
   category: {
     name: '',
     products: []
   },
   currencies: [],
+  categoruInputName: {
+    categoryName: ''
+  }
  };
 
 export const dataSlice = createSlice({
@@ -36,10 +29,16 @@ export const dataSlice = createSlice({
 
     setCategories(
       state,
-      action: PayloadAction<Categories>) {        
+      action: PayloadAction<Categories[]>) {        
       state.categories = action.payload
-      console.log('slice', state.categories)
-      
+     // console.log('slice', action.payload)      
+    },
+
+    setCategoryName(
+      state,
+      action: PayloadAction<CategoryName>) {        
+      state.categoruInputName = action.payload
+      console.log('slice', action.payload)      
     },
 
     /*
@@ -53,5 +52,5 @@ export const dataSlice = createSlice({
   },
 });
 
-export const { setCategory, setCategories } = dataSlice.actions;
+export const { setCategory, setCategories, setCategoryName } = dataSlice.actions;
 export default dataSlice.reducer;

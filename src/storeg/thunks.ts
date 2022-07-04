@@ -8,7 +8,7 @@ export const getCategoryThunk = () => async (dispatch: AppDispatch) => {
     try {     
         const {data} = await DataService.getCategory({ query: GET_CATEGORY }); 
         if (data) {
-            console.log('thunk', data.category)
+            //console.log('thunk', data.category)
           dispatch(setCategory(data.category));
         } else {
           console.log('Something went wrong!')
@@ -31,4 +31,5 @@ export const getCategoryThunk = () => async (dispatch: AppDispatch) => {
         console.log(error);
       }
   }
+
 

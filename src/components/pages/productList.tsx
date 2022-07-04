@@ -1,15 +1,19 @@
 import React from "react";
 import { GridContainer, Wrapper } from "../../styles/productList.styles";
 import ProductCard from "../productCard";
-import { Data } from "../../storeg/dataSlice";
 import { connect } from "react-redux";
 import { getCategoryThunk } from "../../storeg/thunks";
-import { Product } from "../../storeg/types";
+import { Data, Product } from "../../storeg/interfaces";
 
 class ProductList extends React.Component<any, any> {
-  componentWillUnmount() {}
   componentDidMount() {
     this.props.getCategoryThunk();
+  }
+
+  componentDidUpdate(prevState: any) {
+    if (prevState.inputName !== this.props.inputName) {
+      console.log("wooork");
+    }
   }
   render() {
     return (
@@ -28,6 +32,7 @@ class ProductList extends React.Component<any, any> {
 let mapStateToProps = (state: Data) => ({
   categoryName: state.category.name,
   products: state.category.products,
+  inputName: state.categoruInputName,
 });
 
 export default connect(mapStateToProps, { getCategoryThunk })(ProductList);

@@ -1,26 +1,20 @@
-import { type } from "os"
 
-export type  Price = {
+export interface  Price {
     currency: Currency
     amount: number
   }
-
-
-export type Attribute = {
+export interface Attribute {
     displayValue: String
     value: String
     id: String
 }
-
-export type AttributeSet = {
+export interface AttributeSet {
     id: String
     name: String
     type: String
     items: [Attribute]
   }
-
-
-export type Product = {
+export interface Product {
     id: String,
     name: String,
     inStock: Boolean,
@@ -31,20 +25,25 @@ export type Product = {
     prices: [Price],
     brand: String
 }
-
-export type Categories = {
-    name: string[],
-    
+export interface Categories {
+    name: string,    
 }
-
-export type Category = {
+export interface Category {
     name: String
     products: Product[]
-  }
-  
-
-
-export type Currency = {
+  }  
+export interface CategoryName {
+    categoryName: string
+}
+export interface Currency {
     label: String
     symbol: String
   }
+
+export interface Data {
+    categories: Categories[]
+    category: Category
+    product: Product[]
+    currencies: Currency[]
+    categoruInputName: CategoryName  
+  };

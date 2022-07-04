@@ -6,21 +6,31 @@ import emptyCart from "../styles/icon/emptyCart.svg";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getCategoriesNameThunk } from "../storeg/thunks";
-import { Data } from "../storeg/dataSlice";
+import { Data } from "../storeg/interfaces";
+import { setCategoryName } from "../storeg/dataSlice";
 
 class NavBar extends React.Component<any, any> {
   componentDidMount() {
     this.props.getCategoriesNameThunk();
   }
 
+  setInputCategoryName = (event: any) => {
+    this.props.setCategoryName(event.target.value);
+  };
+
   render() {
-    console.log("navBar", this.props.categoriesName[0]);
     return (
       <Wrapper>
         <Navigation>
-          <Button as="button"> WOMEN </Button>
-          <Button>MEN</Button>
-          <Button>KIDS</Button>
+          {this.props.categoriesName.map((elem: any) => (
+            <Button
+              key={elem.name}
+              value={elem.name}
+              onClick={this.setInputCategoryName}
+            >
+              {elem.name}
+            </Button>
+          ))}
         </Navigation>
 
         <img src={brandIcon} alt="brandIcon" width="41" height="41" />
@@ -39,4 +49,7 @@ let mapStateToProps = (state: Data) => ({
   categoriesName: state.categories,
 });
 
-export default connect(mapStateToProps, { getCategoriesNameThunk })(NavBar);
+export default connect(mapStateToProps, {
+  getCategoriesNameThunk,
+  setCategoryName,
+})(NavBar);
