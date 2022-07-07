@@ -47,3 +47,14 @@ export interface Data {
     currencies: Currency[]
     categoruInputName: CategoryName  
   };
+
+  export interface CategoryQuery {    
+      query: any 
+  }
+
+  export interface CategoryInput {
+    query: any 
+    variables: {
+      title: string
+    }
+  }

@@ -23,7 +23,7 @@ export const dataSlice = createSlice({
       state,
       action: PayloadAction<Category>) {        
       state.category = action.payload
-      
+      console.log('slice', action.payload)
       //localStorage.setItem('weathers', JSON.stringify(state.weathers))
     },
 
@@ -38,7 +38,7 @@ export const dataSlice = createSlice({
       state,
       action: PayloadAction<CategoryName>) {        
       state.categoruInputName = action.payload
-      console.log('slice', action.payload)      
+     // console.log('slice', action.payload)      
     },
 
     /*

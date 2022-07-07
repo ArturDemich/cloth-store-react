@@ -1,8 +1,9 @@
-import { gql } from "@apollo/client";
+import gql from "graphql-tag";
+import {CategoryInput} from "../storeg/interfaces"
 
 export const GET_CATEGORY = gql`
-query getCategory {
-  category {
+query getCategory($input: CategoryInput) {
+  category(input: $input) {
     name
     products {
         id,

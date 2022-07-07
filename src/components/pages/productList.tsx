@@ -4,15 +4,12 @@ import ProductCard from "../productCard";
 import { connect } from "react-redux";
 import { getCategoryThunk } from "../../storeg/thunks";
 import { Data, Product } from "../../storeg/interfaces";
+import { GET_CATEGORY } from "../../services/queries";
 
 class ProductList extends React.Component<any, any> {
-  componentDidMount() {
-    this.props.getCategoryThunk();
-  }
-
   componentDidUpdate(prevState: any) {
     if (prevState.inputName !== this.props.inputName) {
-      console.log("wooork");
+      this.props.getCategoryThunk(this.props.inputName);
     }
   }
   render() {
@@ -33,6 +30,7 @@ let mapStateToProps = (state: Data) => ({
   categoryName: state.category.name,
   products: state.category.products,
   inputName: state.categoruInputName,
+  name: "tech",
 });
 
 export default connect(mapStateToProps, { getCategoryThunk })(ProductList);

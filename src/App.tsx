@@ -8,10 +8,13 @@ import ProductDescription from "./components/pages/productDescription";
 import ProductList from "./components/pages/productList";
 import { apolloClient } from "./graphql";
 import { Wrapper } from "./styles/app.stales";
-import { getCategoriesNameThunk } from "./storeg/thunks";
+import { getCategoryThunk } from "./storeg/thunks";
 import { Data } from "./storeg/interfaces";
 
 class App extends React.Component<any, any> {
+  componentDidMount() {
+    this.props.getCategoryThunk(this.props.name);
+  }
   render() {
     return (
       <ApolloProvider client={apolloClient}>
@@ -33,6 +36,7 @@ class App extends React.Component<any, any> {
 
 let mapStateToProps = (state: Data) => ({
   categoriesName: state.categories,
+  name: "all",
 });
 
-export default connect(mapStateToProps, { getCategoriesNameThunk })(App);
+export default connect(mapStateToProps, { getCategoryThunk })(App);
