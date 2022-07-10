@@ -4,21 +4,32 @@ import ProductCard from "../productCard";
 import { connect } from "react-redux";
 import { getCategoryThunk } from "../../storeg/thunks";
 import { Data, Product } from "../../storeg/interfaces";
-import { GET_CATEGORY } from "../../services/queries";
+import { NavLink } from "react-router-dom";
+import { withHocList } from "../hocs/productListHoc";
 
 class ProductList extends React.Component<any, any> {
+  componentDidMount() {
+    this.props.getCategoryThunk(this.props.params.categoryName);
+  }
   componentDidUpdate(prevState: any) {
-    if (prevState.inputName !== this.props.inputName) {
-      this.props.getCategoryThunk(this.props.inputName);
+    if (prevState.params.categoryName !== this.props.params.categoryName) {
+      this.props.getCategoryThunk(this.props.params.categoryName);
     }
   }
   render() {
+    console.log("productList", this.props.params);
     return (
       <Wrapper>
         <h1> {this.props.categoryName} </h1>
         <GridContainer>
           {this.props.products.map((elem: Product) => (
-            <ProductCard {...elem} key={elem.id.toString()} />
+            <NavLink
+              key={elem.id.toString()}
+              to={`/product-description/${elem.id}`}
+              state={elem}
+            >
+              <ProductCard {...elem} />
+            </NavLink>
           ))}
         </GridContainer>
       </Wrapper>
@@ -26,11 +37,15 @@ class ProductList extends React.Component<any, any> {
   }
 }
 
-let mapStateToProps = (state: Data) => ({
+const mapStateToProps = (state: Data) => ({
   categoryName: state.category.name,
   products: state.category.products,
-  inputName: state.categoruInputName,
+  inputName: state.categoryInputName,
   name: "tech",
 });
 
-export default connect(mapStateToProps, { getCategoryThunk })(ProductList);
+let WithUrlProductList = withHocList(ProductList);
+
+export default connect(mapStateToProps, { getCategoryThunk })(
+  WithUrlProductList
+);

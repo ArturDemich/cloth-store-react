@@ -26,7 +26,8 @@ export interface Product {
     brand: String
 }
 export interface Categories {
-    name: string,    
+    name: string,
+    __typename: string    
 }
 export interface Category {
     name: String
@@ -45,7 +46,7 @@ export interface Data {
     category: Category
     product: Product[]
     currencies: Currency[]
-    categoruInputName: CategoryName  
+    categoryInputName: string  
   };
 
   export interface CategoryQuery {    

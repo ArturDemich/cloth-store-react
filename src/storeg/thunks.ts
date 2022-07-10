@@ -1,6 +1,6 @@
 import {DataService} from '../services/dataService';
 import { GET_CATEGORIES_NAME, GET_CATEGORY } from '../services/queries';
-import { setCategories, setCategory } from './dataSlice';
+import { setCategoriesNames, setCategory, setCategoryName } from './dataSlice';
 import { CategoryInput, CategoryQuery } from './interfaces';
 import { AppDispatch } from './store';
 
@@ -21,9 +21,11 @@ export const getCategoryThunk = (payload: CategoryQuery) => async (dispatch: App
  
   export const getCategoriesNameThunk = () => async (dispatch: AppDispatch) => {
     try {     
-        const {data} = await DataService.getCategories({ query: GET_CATEGORIES_NAME }); 
-        if (data) {           
-          dispatch(setCategories(data.categories));
+        const {data} = await DataService.getCategories(); 
+        if (data) {    
+            console.log('thunkNames', data.categories[0].name)       
+          dispatch(setCategoriesNames(data.categories));
+          dispatch(setCategoryName(data.categories[0].name))
         } else {
           console.log('Something went wrong!')
         }

@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const Wrapper = styled.div`
+export const Header = styled.div`
 display: flex;
 background-color: #FFFFFF;
 height: 80px;
@@ -10,7 +10,7 @@ width: auto;
 align-items: center;
 `
 
-export const Navigation = styled.div`
+export const NavigationBar = styled.div`
 display: flex;
 flex-direction: row;
 align-items: flex-start;

@@ -16,29 +16,35 @@ import {
   Wrapper,
 } from "../../styles/productDescription.styles";
 import Image from "../../styles/icon/Image.png";
+import { connect } from "react-redux";
+import { Data } from "../../storeg/interfaces";
+import { useLocation } from "react-router-dom";
+import { withHocDescription } from "../hocs/productDescriptionHoc";
 
-class ProductDescription extends Component {
+class ProductDescription extends React.Component<any, any> {
   render() {
+    console.log("props", this.props);
     return (
       <Wrapper>
         <Images>
-          <Img>
-            <img src={Image} width="80" height="80" alt="image" />
-          </Img>
-          <Img>
-            <img src={Image} width="80" height="80" alt="image" />
-          </Img>
-          <Img>
-            <img src={Image} width="80" height="80" alt="image" />
-          </Img>
+          {this.props.lacation.gallery.map((el: string) => (
+            <Img>
+              <img src={el} width="80" height="80" alt="image" />
+            </Img>
+          ))}
         </Images>
         <MainImage>
-          <img src={Image} width="610" height="510" alt="image" />
+          <img
+            src={this.props.lacation.gallery[0]}
+            width="610"
+            height="510"
+            alt="MainImage"
+          />
         </MainImage>
 
         <Action>
-          <Title>Apolo</Title>
-          <p>Running Short</p>
+          <Title>{this.props.lacation.name}</Title>
+          <p>{this.props.lacation.brand}</p>
           <TextStrong>Size:</TextStrong>
           <Size>
             <ButtonSize>S</ButtonSize>
@@ -53,17 +59,22 @@ class ProductDescription extends Component {
             <ColorSquare />
           </Color>
           <TextStrong>Price:</TextStrong>
-          <Price>123.00</Price>
+          <Price>{this.props.lacation.prices[0].amount}</Price>
           <Button>Add to Cart</Button>
-          <Description>
-            Find stunning women's cocktail dresses and party dresses. Stand out
-            in lace and metallic cocktail dresses and party dresses from all
-            your favorite brands.
-          </Description>
+          <Description>{this.props.lacation.description}</Description>
         </Action>
       </Wrapper>
     );
   }
 }
 
-export default ProductDescription;
+const mapStateToProps = (state: Data) => ({
+  /* categoryName: state.category.name,
+  products: state.category.products,
+  inputName: state.categoruInputName,
+  name: "tech", */
+});
+
+let WithUrlDataComponent = withHocDescription(ProductDescription);
+
+export default connect(mapStateToProps, { useLocation })(WithUrlDataComponent);

@@ -9,9 +9,7 @@ const initialState: Data = {
     products: []
   },
   currencies: [],
-  categoruInputName: {
-    categoryName: ''
-  }
+  categoryInputName: ''
  };
 
 export const dataSlice = createSlice({
@@ -23,11 +21,11 @@ export const dataSlice = createSlice({
       state,
       action: PayloadAction<Category>) {        
       state.category = action.payload
-      console.log('slice', action.payload)
+      console.log('sliceCategory', action.payload)
       //localStorage.setItem('weathers', JSON.stringify(state.weathers))
     },
 
-    setCategories(
+    setCategoriesNames(
       state,
       action: PayloadAction<Categories[]>) {        
       state.categories = action.payload
@@ -36,9 +34,9 @@ export const dataSlice = createSlice({
 
     setCategoryName(
       state,
-      action: PayloadAction<CategoryName>) {        
-      state.categoruInputName = action.payload
-     // console.log('slice', action.payload)      
+      action: PayloadAction<Data['categoryInputName']>) {        
+      state.categoryInputName = action.payload
+      console.log('sliceName', state.categoryInputName)      
     },
 
     /*
@@ -52,5 +50,5 @@ export const dataSlice = createSlice({
   },
 });
 
-export const { setCategory, setCategories, setCategoryName } = dataSlice.actions;
+export const { setCategory, setCategoriesNames, setCategoryName } = dataSlice.actions;
 export default dataSlice.reducer;
