@@ -102,10 +102,11 @@ export const Color = styled.div`
 display: flex;
 flex-direction: row;
 `
+// #D3D2D5;
 export const ColorSquare = styled.button`
 width: 32px;
 height: 32px;
-background: #D3D2D5;
+background: ${props => props.theme.main};
 margin: 2px;
 `
 

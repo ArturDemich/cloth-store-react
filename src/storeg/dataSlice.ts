@@ -1,9 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import ProductCard from '../components/productCard';
 import { Categories, Category, CategoryName, Currency, Data, Product } from './interfaces';
 
 const initialState: Data = {
   categories: [],
-  product: [],
+  product: {
+    id: '',
+    name: '',
+    inStock: true,
+    gallery: [''],
+    description: '',
+    category: '',
+    attributes: [],
+    prices: [],
+    brand: ''
+  },
   category: {
     name: '',
     products: []
@@ -39,6 +50,14 @@ export const dataSlice = createSlice({
       console.log('sliceName', state.categoryInputName)      
     },
 
+    
+    setProduct(
+      state,
+      action: PayloadAction<Product>) {        
+      state.product = action.payload
+      console.log('sliceProduct', action.payload)      
+    },
+
     /*
     removeWeatherCard(state, action: PayloadAction<{id: number}>){
       state.weathers = [...state.weathers.filter(el => el.id !== action.payload.id)]
@@ -50,5 +69,5 @@ export const dataSlice = createSlice({
   },
 });
 
-export const { setCategory, setCategoriesNames, setCategoryName } = dataSlice.actions;
+export const { setCategory, setCategoriesNames, setCategoryName, setProduct } = dataSlice.actions;
 export default dataSlice.reducer;

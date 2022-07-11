@@ -12,7 +12,16 @@ query getCategory($input: CategoryInput) {
         gallery,
         description,
         category,
-        
+        attributes {
+          id,
+          name,
+          type,
+          items {
+            displayValue,
+            value,
+            id,
+          }
+        }
         prices {
             currency {label},
             amount
@@ -29,4 +38,32 @@ query getCategories {
     name    
   }
 }
+`;
+
+export const GET_PRODUCT = gql`
+query getProduct($id: String!) {  
+    product(id: $id) {
+        id,
+        name,
+        inStock,
+        gallery,
+        description,
+        category,
+        attributes {
+          id,
+          name,
+          type,
+          items {
+            displayValue,
+            value,
+            id,
+          }
+        }
+        prices {
+            currency {label},
+            amount
+          },
+        brand,
+    }
+  }
 `;

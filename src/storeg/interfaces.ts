@@ -21,8 +21,8 @@ export interface Product {
     gallery: [String],
     description: String,
     category: String,
-    attributes: [AttributeSet],
-    prices: [Price],
+    attributes: AttributeSet[],
+    prices: Price[],
     brand: String
 }
 export interface Categories {
@@ -44,7 +44,7 @@ export interface Currency {
 export interface Data {
     categories: Categories[]
     category: Category
-    product: Product[]
+    product: Product
     currencies: Currency[]
     categoryInputName: string  
   };
@@ -57,5 +57,12 @@ export interface Data {
     query: any 
     variables: {
       title: string
+    }
+  }
+
+  export interface ProductInputId {
+    query: any 
+    variables: {
+      id: string
     }
   }

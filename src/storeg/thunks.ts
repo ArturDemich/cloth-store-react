@@ -1,7 +1,7 @@
 import {DataService} from '../services/dataService';
 import { GET_CATEGORIES_NAME, GET_CATEGORY } from '../services/queries';
-import { setCategoriesNames, setCategory, setCategoryName } from './dataSlice';
-import { CategoryInput, CategoryQuery } from './interfaces';
+import { setCategoriesNames, setCategory, setCategoryName, setProduct } from './dataSlice';
+import { CategoryInput, CategoryQuery, ProductInputId } from './interfaces';
 import { AppDispatch } from './store';
 
 
@@ -34,4 +34,18 @@ export const getCategoryThunk = (payload: CategoryQuery) => async (dispatch: App
       }
   }
 
+
+  export const getProductThunk = (payload: string) => async (dispatch: AppDispatch) => {
+    try {     
+        const {data} = await DataService.getProduct(payload); 
+        if (data) {           
+          console.log('productThunk', data.product)
+          dispatch(setProduct(data.product));
+        } else {
+          console.log('Something went wrong!')
+        }
+      } catch (error) {
+        console.log(error);
+      }
+  }
 

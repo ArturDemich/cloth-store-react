@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Action,
   Button,
@@ -15,27 +15,32 @@ import {
   Title,
   Wrapper,
 } from "../../styles/productDescription.styles";
-import Image from "../../styles/icon/Image.png";
 import { connect } from "react-redux";
 import { Data } from "../../storeg/interfaces";
-import { useLocation } from "react-router-dom";
 import { withHocDescription } from "../hocs/productDescriptionHoc";
+import parse from "html-react-parser";
+import { getProductThunk } from "../../storeg/thunks";
 
 class ProductDescription extends React.Component<any, any> {
+  componentDidMount() {
+    this.props.getProductThunk(this.props.params.productId);
+  }
+
+  parse = require("html-react-parser");
   render() {
     console.log("props", this.props);
     return (
       <Wrapper>
         <Images>
-          {this.props.lacation.gallery.map((el: string) => (
-            <Img>
+          {this.props.gallery.map((el: string) => (
+            <Img key={el}>
               <img src={el} width="80" height="80" alt="image" />
             </Img>
           ))}
         </Images>
         <MainImage>
           <img
-            src={this.props.lacation.gallery[0]}
+            src={this.props.gallery[0]}
             width="610"
             height="510"
             alt="MainImage"
@@ -43,25 +48,27 @@ class ProductDescription extends React.Component<any, any> {
         </MainImage>
 
         <Action>
-          <Title>{this.props.lacation.name}</Title>
-          <p>{this.props.lacation.brand}</p>
-          <TextStrong>Size:</TextStrong>
+          <Title>{this.props.name}</Title>
+          <p>{this.props.brand}</p>
+          {this.props.attributtesName && (
+            <TextStrong>{this.props.attributtesName}</TextStrong>
+          )}
           <Size>
-            <ButtonSize>S</ButtonSize>
-            <ButtonSize>M</ButtonSize>
-            <ButtonSize>L</ButtonSize>
-            <ButtonSize>xl</ButtonSize>
+            {this.props.size &&
+              this.props.size.map((size: any) => (
+                <ButtonSize key={size.id}>{size.displayValue}</ButtonSize>
+              ))}
           </Size>
           <TextStrong>Color:</TextStrong>
           <Color>
-            <ColorSquare />
+            <ColorSquare theme={{ main: "royalblue" }} />
             <ColorSquare />
             <ColorSquare />
           </Color>
           <TextStrong>Price:</TextStrong>
           <Price>{this.props.lacation.prices[0].amount}</Price>
           <Button>Add to Cart</Button>
-          <Description>{this.props.lacation.description}</Description>
+          <Description>{parse(this.props.description)}</Description>
         </Action>
       </Wrapper>
     );
@@ -69,12 +76,19 @@ class ProductDescription extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: Data) => ({
-  /* categoryName: state.category.name,
-  products: state.category.products,
-  inputName: state.categoruInputName,
-  name: "tech", */
+  id: state.product.id,
+  name: state.product.name,
+  inStock: state.product.inStock,
+  gallery: state.product.gallery,
+  description: state.product.description,
+  category: state.product.category,
+  attributes: state.product.attributes,
+  prices: state.product.prices,
+  brand: state.product.brand,
 });
 
 let WithUrlDataComponent = withHocDescription(ProductDescription);
 
-export default connect(mapStateToProps, { useLocation })(WithUrlDataComponent);
+export default connect(mapStateToProps, { getProductThunk })(
+  WithUrlDataComponent
+);
