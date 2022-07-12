@@ -22,11 +22,23 @@ import parse from "html-react-parser";
 import { getProductThunk } from "../../storeg/thunks";
 
 class ProductDescription extends React.Component<any, any> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      image: this.props.gallery[0],
+    };
+  }
   componentDidMount() {
     this.props.getProductThunk(this.props.params.productId);
   }
+  componentDidUpdate(prevState: any) {
+    if (prevState !== this.props) {
+      this.setState({ image: this.props.gallery[0] });
+    }
+  }
 
   parse = require("html-react-parser");
+
   render() {
     console.log("props", this.props);
     return (
@@ -34,13 +46,21 @@ class ProductDescription extends React.Component<any, any> {
         <Images>
           {this.props.gallery.map((el: string) => (
             <Img key={el}>
-              <img src={el} width="80" height="80" alt="image" />
+              <img
+                src={el}
+                width="80"
+                height="80"
+                alt="image"
+                onClick={(el) =>
+                  this.setState({ image: el.currentTarget.currentSrc })
+                }
+              />
             </Img>
           ))}
         </Images>
         <MainImage>
           <img
-            src={this.props.gallery[0]}
+            src={this.state.image}
             width="610"
             height="510"
             alt="MainImage"
@@ -50,21 +70,39 @@ class ProductDescription extends React.Component<any, any> {
         <Action>
           <Title>{this.props.name}</Title>
           <p>{this.props.brand}</p>
-          {this.props.attributtesName && (
-            <TextStrong>{this.props.attributtesName}</TextStrong>
+
+          {this.props.size && (
+            <>
+              <TextStrong>{this.props.sizeName}</TextStrong>
+              <Size>
+                {this.props.size.map((size: any) => (
+                  <ButtonSize key={size.id}>{size.value}</ButtonSize>
+                ))}
+              </Size>
+            </>
           )}
-          <Size>
-            {this.props.size &&
-              this.props.size.map((size: any) => (
-                <ButtonSize key={size.id}>{size.displayValue}</ButtonSize>
-              ))}
-          </Size>
-          <TextStrong>Color:</TextStrong>
-          <Color>
-            <ColorSquare theme={{ main: "royalblue" }} />
-            <ColorSquare />
-            <ColorSquare />
-          </Color>
+          {this.props.capacity && (
+            <>
+              <TextStrong>{this.props.capacityName}</TextStrong>
+              <Size>
+                {this.props.capacity.map((elem: any) => (
+                  <ButtonSize key={elem.id}>{elem.displayValue}</ButtonSize>
+                ))}
+              </Size>
+            </>
+          )}
+
+          {this.props.color && (
+            <>
+              <TextStrong>{this.props.colorName}</TextStrong>
+              <Color>
+                {this.props.color.map((elem: any) => (
+                  <ColorSquare key={elem.id} theme={{ main: elem.value }} />
+                ))}
+              </Color>
+            </>
+          )}
+
           <TextStrong>Price:</TextStrong>
           <Price>{this.props.lacation.prices[0].amount}</Price>
           <Button>Add to Cart</Button>

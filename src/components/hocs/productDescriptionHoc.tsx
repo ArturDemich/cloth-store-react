@@ -6,19 +6,23 @@ export const withHocDescription = (WrappedComponent: any) => (props: any) => {
   const location = useLocation();
 
   const color: any = [];
+  let colorName: any = "";
+
   const size: any = [];
+  let sizeName: any = "";
+
   const capacity: any = [];
-  let attributtesName: string = "";
+  let capacityName: string = "";
 
   props.attributes.map((elem: any) => {
     if (elem.name == "Capacity") {
-      attributtesName = "Capacity";
+      capacityName = "Capacity";
       elem.items.map((el: any) => capacity.push(el));
     } else if (elem.name == "Color") {
-      attributtesName = "Color";
+      colorName = "Color";
       elem.items.map((el: any) => color.push(el));
     } else if (elem.name == "Size") {
-      attributtesName = "Size";
+      sizeName = "Size";
       elem.items.map((el: any) => size.push(el));
     }
   });
@@ -33,7 +37,9 @@ export const withHocDescription = (WrappedComponent: any) => (props: any) => {
       color={color}
       size={size}
       capacity={capacity}
-      attributtesName={attributtesName}
+      colorName={colorName}
+      sizeName={sizeName}
+      capacityName={capacityName}
     />
   );
 };

@@ -16,6 +16,7 @@ margin-right: 3rem;
 `
 export const Img = styled.div`
 margin-bottom: 2rem;
+cursor: pointer;
 
 `
 export const MainImage = styled.div`
@@ -76,6 +77,7 @@ line-height: 120%;
 color: #FFFFFF;
 text-transform: uppercase;
 margin-top: 2rem;
+cursor: pointer;
 `
 
 export const Size = styled.div`
@@ -95,19 +97,20 @@ justify-content: center;
 align-items: center;
 background: #FFFFFF;
 text-transform: uppercase;
-
+cursor: pointer;
 `
 
 export const Color = styled.div`
 display: flex;
 flex-direction: row;
 `
-// #D3D2D5;
+
 export const ColorSquare = styled.button`
 width: 32px;
 height: 32px;
 background: ${props => props.theme.main};
 margin: 2px;
+cursor: pointer;
 `
 
 export const Price = styled.div`
