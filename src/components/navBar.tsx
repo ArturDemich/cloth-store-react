@@ -8,11 +8,10 @@ import {
 import brandIcon from "../styles/icon/brandIcon.svg";
 import $$ from "../styles/icon/$$.svg";
 import emptyCart from "../styles/icon/emptyCart.svg";
-import { Link, Navigate, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { connect } from "react-redux";
 import { getCategoriesNameThunk } from "../storeg/thunks";
 import { Data } from "../storeg/interfaces";
-import { setCategoryName } from "../storeg/dataSlice";
 import { withHocNavBar } from "./hocs/navBarHoc";
 
 class NavBar extends React.Component<any, any> {
@@ -60,5 +59,4 @@ let withHoc = withHocNavBar(NavBar);
 
 export default connect(mapStateToProps, {
   getCategoriesNameThunk,
-  setCategoryName,
 })(withHoc);

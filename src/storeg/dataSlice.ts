@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import ProductCard from '../components/productCard';
-import { Categories, Category, CategoryName, Currency, Data, Product } from './interfaces';
+import { Categories, Category, CategoryName, Currency, Data, Product, ProductInCart } from './interfaces';
 
 const initialState: Data = {
   categories: [],
@@ -13,14 +13,20 @@ const initialState: Data = {
     category: '',
     attributes: [],
     prices: [],
-    brand: ''
+    brand: '',
+    quantityInCart: 0,
   },
   category: {
     name: '',
     products: []
   },
   currencies: [],
-  categoryInputName: ''
+  categoryInputName: '',
+  cart: {
+    products: [],    
+    quantity: 0,
+    tottal: 0,
+  }
  };
 
 export const dataSlice = createSlice({
@@ -32,7 +38,7 @@ export const dataSlice = createSlice({
       state,
       action: PayloadAction<Category>) {        
       state.category = action.payload
-      console.log('sliceCategory', action.payload)
+      //console.log('sliceCategory', action.payload)
       //localStorage.setItem('weathers', JSON.stringify(state.weathers))
     },
 
@@ -47,7 +53,7 @@ export const dataSlice = createSlice({
       state,
       action: PayloadAction<Data['categoryInputName']>) {        
       state.categoryInputName = action.payload
-      console.log('sliceName', state.categoryInputName)      
+      //console.log('sliceName', state.categoryInputName)      
     },
 
     
@@ -56,6 +62,13 @@ export const dataSlice = createSlice({
       action: PayloadAction<Product>) {        
       state.product = action.payload
       console.log('sliceProduct', action.payload)      
+    },
+
+    setCartItems(
+      state,
+      action: PayloadAction<ProductInCart>) {        
+      state.cart.products = [action.payload]
+      console.log('sliceCartItems', action.payload)      
     },
 
     /*
@@ -69,5 +82,5 @@ export const dataSlice = createSlice({
   },
 });
 
-export const { setCategory, setCategoriesNames, setCategoryName, setProduct } = dataSlice.actions;
+export const { setCategory, setCategoriesNames, setCategoryName, setProduct, setCartItems } = dataSlice.actions;
 export default dataSlice.reducer;

@@ -24,6 +24,7 @@ export interface Product {
     attributes: AttributeSet[],
     prices: Price[],
     brand: String
+    quantityInCart: number
 }
 export interface Categories {
     name: string,
@@ -47,6 +48,7 @@ export interface Data {
     product: Product
     currencies: Currency[]
     categoryInputName: string  
+    cart: Cart
   };
 
   export interface CategoryQuery {    
@@ -65,4 +67,16 @@ export interface Data {
     variables: {
       id: string
     }
+  }
+
+  export interface ProductInCart {
+    product: Product
+    quantityItems: number
+  }
+
+
+  export interface Cart {
+    products: ProductInCart[]
+    quantity: number
+    tottal: number
   }
