@@ -20,6 +20,7 @@ import { Data } from "../../storeg/interfaces";
 import { withHocDescription } from "../hocs/productDescriptionHoc";
 import parse from "html-react-parser";
 import { getProductThunk } from "../../storeg/thunks";
+import { setCartItems } from "../../storeg/dataSlice";
 
 class ProductDescription extends React.Component<any, any> {
   constructor(props: any) {
@@ -86,7 +87,12 @@ class ProductDescription extends React.Component<any, any> {
               <TextStrong>{this.props.capacityName}</TextStrong>
               <Size>
                 {this.props.capacity.map((elem: any) => (
-                  <ButtonSize key={elem.id}>{elem.displayValue}</ButtonSize>
+                  <ButtonSize
+                    key={elem.id}
+                    onClick={() => console.log(this.props.cart)}
+                  >
+                    {elem.displayValue}
+                  </ButtonSize>
                 ))}
               </Size>
             </>
@@ -104,8 +110,10 @@ class ProductDescription extends React.Component<any, any> {
           )}
 
           <TextStrong>Price:</TextStrong>
-          <Price>{this.props.lacation.prices[0].amount}</Price>
-          <Button>Add to Cart</Button>
+          <Price>{this.props.location.prices[0].amount}</Price>
+          <Button onClick={() => this.props.setCartItems(this.props.product)}>
+            Add to Cart
+          </Button>
           <Description>{parse(this.props.description)}</Description>
         </Action>
       </Wrapper>
@@ -123,10 +131,12 @@ const mapStateToProps = (state: Data) => ({
   attributes: state.product.attributes,
   prices: state.product.prices,
   brand: state.product.brand,
+  cart: state.cart.products,
+  product: state.product,
 });
 
 let WithUrlDataComponent = withHocDescription(ProductDescription);
 
-export default connect(mapStateToProps, { getProductThunk })(
+export default connect(mapStateToProps, { getProductThunk, setCartItems })(
   WithUrlDataComponent
 );

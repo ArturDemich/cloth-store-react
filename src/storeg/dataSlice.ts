@@ -60,15 +60,41 @@ export const dataSlice = createSlice({
     setProduct(
       state,
       action: PayloadAction<Product>) {        
-      state.product = action.payload
+      state.product.attributes = action.payload.attributes
+      state.product.brand = action.payload.brand
+      state.product.category = action.payload.category
+      state.product.description = action.payload.description
+      state.product.gallery = action.payload.gallery
+      state.product.id = action.payload.id
+      state.product.inStock = action.payload.inStock
+      state.product.name = action.payload.name
+      state.product.prices = action.payload.prices
+      state.product.quantityInCart = 0
       console.log('sliceProduct', action.payload)      
     },
 
     setCartItems(
       state,
-      action: PayloadAction<ProductInCart>) {        
-      state.cart.products = [action.payload]
-      console.log('sliceCartItems', action.payload)      
+      action: PayloadAction<Product>) {
+        console.log('sliceCartItems', action.payload) 
+        const products: Product[] = state.cart.products
+        if(products) {
+          const existingProductIndex:number = products.findIndex((value) =>{
+            return value.id === action.payload.id
+          })
+          if(existingProductIndex === -1) {
+            state.cart.products = [...products, action.payload]
+            
+          } else {
+            products[existingProductIndex].quantityInCart = products[existingProductIndex].quantityInCart + 1
+            state.cart.products = [ ...products]
+          }
+        }
+        
+      
+      
+
+      //localStorage.setItem('itemCart', JSON.stringify(state.cart.products))     
     },
 
     /*

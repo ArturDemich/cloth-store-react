@@ -33,7 +33,7 @@ export const withHocDescription = (WrappedComponent: any) => (props: any) => {
     <WrappedComponent
       {...props}
       params={params}
-      lacation={location.state}
+      location={location.state}
       color={color}
       size={size}
       capacity={capacity}

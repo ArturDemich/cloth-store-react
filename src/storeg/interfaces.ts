@@ -76,7 +76,7 @@ export interface Data {
 
 
   export interface Cart {
-    products: ProductInCart[]
+    products: Product[]
     quantity: number
     tottal: number
   }
