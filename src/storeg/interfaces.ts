@@ -24,7 +24,7 @@ export interface Product {
     attributes: AttributeSet[],
     prices: Price[],
     brand: String
-    quantityInCart: number
+    
 }
 export interface Categories {
     name: string,
@@ -71,12 +71,12 @@ export interface Data {
 
   export interface ProductInCart {
     product: Product
-    quantityItems: number
+    quantityProduct: number
   }
 
 
   export interface Cart {
-    products: Product[]
+    products: ProductInCart[]
     quantity: number
     tottal: number
   }

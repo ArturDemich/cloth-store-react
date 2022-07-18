@@ -8,6 +8,8 @@ margin-bottom: 1rem;
 justify-content: space-between;
 width: auto;
 align-items: center;
+padding-left: 100px;
+padding-right: 100px;
 `
 
 export const NavigationBar = styled.div`
@@ -15,7 +17,7 @@ display: flex;
 flex-direction: row;
 align-items: flex-start;
 height: 56px;
-padding-left: 4rem;
+//padding-left: 4rem;
 `
 
 /*export const Button = styled.button`
@@ -90,5 +92,5 @@ width: 204px;
 height: 40px;
 right: 101px;
 top: 23px;
-padding-right: 5rem;
+//padding-right: 5rem;
 `

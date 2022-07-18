@@ -4,7 +4,7 @@ import {
   Button,
   NavigationBar,
   Header,
-} from "../styles/navBar.stales";
+} from "../styles/navBar.styles";
 import brandIcon from "../styles/icon/brandIcon.svg";
 import $$ from "../styles/icon/$$.svg";
 import emptyCart from "../styles/icon/emptyCart.svg";
@@ -20,7 +20,7 @@ class NavBar extends React.Component<any, any> {
   }
 
   render() {
-    console.log("NavBar", this.props.categoriesName);
+    // console.log("NavBar", this.props.categoriesName);
 
     return (
       <>

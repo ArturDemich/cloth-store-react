@@ -14,7 +14,28 @@ export const withHocDescription = (WrappedComponent: any) => (props: any) => {
   const capacity: any = [];
   let capacityName: string = "";
 
-  props.attributes.map((elem: any) => {
+  console.log("hoc", props);
+
+  function checkProps(data: any) {
+    data.map((elem: any) => {
+      if (elem.name == "Capacity") {
+        capacityName = "Capacity";
+        elem.items.map((el: any) => capacity.push(el));
+      } else if (elem.name == "Color") {
+        colorName = "Color";
+        elem.items.map((el: any) => color.push(el));
+      } else if (elem.name == "Size") {
+        sizeName = "Size";
+        elem.items.map((el: any) => size.push(el));
+      }
+    });
+  }
+
+  props.attributes
+    ? checkProps(props.attributes)
+    : checkProps(props.product.attributes);
+
+  /* props.attributes.map((elem: any) => {
     if (elem.name == "Capacity") {
       capacityName = "Capacity";
       elem.items.map((el: any) => capacity.push(el));
@@ -25,9 +46,7 @@ export const withHocDescription = (WrappedComponent: any) => (props: any) => {
       sizeName = "Size";
       elem.items.map((el: any) => size.push(el));
     }
-  });
-
-  console.log("hoc", props);
+  }); */
 
   return (
     <WrappedComponent

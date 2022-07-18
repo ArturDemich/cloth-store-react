@@ -13,7 +13,7 @@ import { Data } from "./storeg/interfaces";
 
 class App extends React.Component<any, any> {
   render() {
-    console.log("App", this.props.categoriesName);
+    // console.log("App", this.props.categoriesName);
     return (
       <ApolloProvider client={apolloClient}>
         <Wrapper>

@@ -111,7 +111,14 @@ class ProductDescription extends React.Component<any, any> {
 
           <TextStrong>Price:</TextStrong>
           <Price>{this.props.location.prices[0].amount}</Price>
-          <Button onClick={() => this.props.setCartItems(this.props.product)}>
+          <Button
+            onClick={() =>
+              this.props.setCartItems({
+                product: this.props.product,
+                quantityProduct: 1,
+              })
+            }
+          >
             Add to Cart
           </Button>
           <Description>{parse(this.props.description)}</Description>
@@ -131,7 +138,7 @@ const mapStateToProps = (state: Data) => ({
   attributes: state.product.attributes,
   prices: state.product.prices,
   brand: state.product.brand,
-  cart: state.cart.products,
+  cart: state.cart,
   product: state.product,
 });
 

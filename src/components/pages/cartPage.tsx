@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { Data, ProductInCart } from "../../storeg/interfaces";
 import {
   Button,
   Infoblock,
@@ -8,17 +10,24 @@ import {
 } from "../../styles/cartPage.styles";
 import CartItem from "../CartItem";
 
-class CartPage extends React.Component {
+class CartPage extends React.Component<any> {
   render() {
     return (
       <Wrapper>
         <Title>Cart</Title>
-        <CartItem />
+
+        {this.props.cartItem[0].product.id ? (
+          this.props.cartItem.map((elem: any) => (
+            <CartItem key={elem.product.id} {...elem} />
+          ))
+        ) : (
+          <Title>Your Cart is empty!</Title>
+        )}
 
         <Infoblock>
           <TextStrong>Tax21%: $42.00</TextStrong>
-          <TextStrong>Quntity: 3</TextStrong>
-          <TextStrong>Total: $200</TextStrong>
+          <TextStrong>Quantity: {this.props.quantity} </TextStrong>
+          <TextStrong>Tottal: ${this.props.tottal}</TextStrong>
           <Button>Order</Button>
         </Infoblock>
       </Wrapper>
@@ -26,4 +35,10 @@ class CartPage extends React.Component {
   }
 }
 
-export default CartPage;
+const mapStateToProps = (state: Data) => ({
+  cartItem: state.cart.products,
+  quantity: state.cart.quantity,
+  tottal: state.cart.tottal,
+});
+
+export default connect(mapStateToProps, null)(CartPage);
