@@ -18,7 +18,8 @@ font-weight: 700;
 font-size: 32px;
 text-transform: uppercase;
 color: #1D1F22;
-margin-bottom: 1rem;
+padding-bottom: 2rem;
+border-bottom: 1px solid #E5E5E5;
 `
 
 export const Button = styled.button`
@@ -61,4 +62,5 @@ align-items: flex-start;
 padding: 0px;
 width: 279px;
 height: 159px;
+
 `

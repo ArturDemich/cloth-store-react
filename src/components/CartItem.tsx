@@ -4,8 +4,12 @@ import { Data } from "../storeg/interfaces";
 import { withHocDescription } from "./hocs/productDescriptionHoc";
 import {
   AtributeBloc,
-  Image,
+  ButtonAdd,
+  ButtonMinus,
+  Images,
   ImageBloc,
+  ItemActions,
+  QuantityProduct,
   WrapperItemCart,
 } from "../styles/cartItem.styles";
 import {
@@ -64,14 +68,20 @@ class CartItem extends React.Component<any> {
         </AtributeBloc>
 
         <ImageBloc>
-          <Image>
+          <ItemActions>
+            <ButtonAdd>+</ButtonAdd>
+            <QuantityProduct> {this.props.quantityProduct} </QuantityProduct>
+            <ButtonMinus>-</ButtonMinus>
+          </ItemActions>
+
+          <Images>
             <img
               src={this.props.product.gallery[0]}
               width="200"
               height="288"
               alt="image"
             />
-          </Image>
+          </Images>
         </ImageBloc>
       </WrapperItemCart>
     );

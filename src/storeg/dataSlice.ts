@@ -82,7 +82,7 @@ export const dataSlice = createSlice({
         console.log('sliceCartItems', action.payload)
 
         const products: ProductInCart[] = state.cart.products        
-        const existingProductIndex:number = products.findIndex((value) =>{
+        const existingProductIndex: number = products.findIndex((value) =>{
           return value.product.id === action.payload.product.id
         })
 
@@ -101,6 +101,17 @@ export const dataSlice = createSlice({
 
       //localStorage.setItem('itemCart', JSON.stringify(state.cart.products))     
     },
+
+    setQuantityProductInCart(
+      state,
+      action: PayloadAction<ProductInCart>) {
+        const products: ProductInCart[] = state.cart.products        
+        const existingProductIndex: number = products.findIndex((value) =>{
+          return value.product.id === action.payload.product.id
+        })
+
+
+      }
 
     /*
     removeWeatherCard(state, action: PayloadAction<{id: number}>){

@@ -33,7 +33,7 @@ class ProductDescription extends React.Component<any, any> {
     this.props.getProductThunk(this.props.params.productId);
   }
   componentDidUpdate(prevState: any) {
-    if (prevState !== this.props) {
+    if (prevState.id !== this.props.id) {
       this.setState({ image: this.props.gallery[0] });
     }
   }

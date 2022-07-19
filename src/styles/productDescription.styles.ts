@@ -54,7 +54,7 @@ font-weight: 700;
 font-size: 18px;
 line-height: 18px;
 color: #1D1F22;
-padding-top: 2rem;
+padding-top: 10px;
 text-transform: uppercase;
 `
 
