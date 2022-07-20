@@ -80,3 +80,8 @@ export interface Data {
     quantity: number
     tottal: number
   }
+
+  export interface setQuantityInCart {
+    product: Product
+    operator: string
+  }

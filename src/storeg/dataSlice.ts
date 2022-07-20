@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import ProductCard from '../components/productCard';
-import { Categories, Category, CategoryName, Currency, Data, Product, ProductInCart } from './interfaces';
+import { Categories, Category, CategoryName, Currency, Data, Product, ProductInCart, setQuantityInCart } from './interfaces';
+
+
 
 const initialState: Data = {
   categories: [],
@@ -104,12 +106,29 @@ export const dataSlice = createSlice({
 
     setQuantityProductInCart(
       state,
-      action: PayloadAction<ProductInCart>) {
+      action: PayloadAction<setQuantityInCart>) {
         const products: ProductInCart[] = state.cart.products        
         const existingProductIndex: number = products.findIndex((value) =>{
           return value.product.id === action.payload.product.id
         })
 
+        if(action.payload.operator === '+') {
+        products[existingProductIndex].quantityProduct = products[existingProductIndex].quantityProduct + 1
+        state.cart.products = [ ...products]
+        state.cart.quantity ++
+        state.cart.tottal += action.payload.product.prices[0].amount
+        } else {
+          products[existingProductIndex].quantityProduct = products[existingProductIndex].quantityProduct - 1
+          console.log('cart -', state.cart.products)
+          if(products[existingProductIndex].quantityProduct === 0) {
+            state.cart.products = [ ...products.filter(el => el.product.id === products[existingProductIndex].product.id)]
+            state.cart.quantity --
+            state.cart.tottal -= action.payload.product.prices[0].amount
+          }
+        state.cart.products = [ ...products]
+        state.cart.quantity --
+        state.cart.tottal -= action.payload.product.prices[0].amount
+        }
 
       }
 
@@ -124,5 +143,5 @@ export const dataSlice = createSlice({
   },
 });
 
-export const { setCategory, setCategoriesNames, setCategoryName, setProduct, setCartItems } = dataSlice.actions;
+export const { setCategory, setCategoriesNames, setCategoryName, setProduct, setCartItems, setQuantityProductInCart } = dataSlice.actions;
 export default dataSlice.reducer;

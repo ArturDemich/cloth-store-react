@@ -25,9 +25,11 @@ class CartPage extends React.Component<any> {
         )}
 
         <Infoblock>
-          <TextStrong>Tax21%: ${this.props.tottal * 0.21}</TextStrong>
+          <TextStrong>
+            Tax21%: ${Math.round(this.props.tottal * 0.21)}
+          </TextStrong>
           <TextStrong>Quantity: {this.props.quantity} </TextStrong>
-          <TextStrong>Tottal: ${this.props.tottal}</TextStrong>
+          <TextStrong>Tottal: ${Math.round(this.props.tottal)}</TextStrong>
           <Button>Order</Button>
         </Infoblock>
       </Wrapper>

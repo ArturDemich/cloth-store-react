@@ -2,15 +2,17 @@ import React from "react";
 import { connect } from "react-redux";
 import { Data } from "../storeg/interfaces";
 import { withHocDescription } from "./hocs/productDescriptionHoc";
+import { setQuantityProductInCart } from "../storeg/dataSlice";
 import {
   AtributeBloc,
-  ButtonAdd,
-  ButtonMinus,
+  ButtonQuantity,
   Images,
   ImageBloc,
   ItemActions,
   QuantityProduct,
   WrapperItemCart,
+  LeftArrow,
+  RightArrow,
 } from "../styles/cartItem.styles";
 import {
   ButtonSize,
@@ -22,7 +24,13 @@ import {
   Title,
 } from "../styles/productDescription.styles";
 
-class CartItem extends React.Component<any> {
+class CartItem extends React.Component<any, any> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      index: 0,
+    };
+  }
   render() {
     console.log("cartItem", this.props);
     return (
@@ -32,7 +40,7 @@ class CartItem extends React.Component<any> {
           <p>{this.props.product.brand}</p>
 
           <TextStrong>Price:</TextStrong>
-          <Price>{this.props.product.prices[0].amount}</Price>
+          <Price>{Math.round(this.props.product.prices[0].amount)}</Price>
 
           {this.props.size && (
             <>
@@ -69,18 +77,38 @@ class CartItem extends React.Component<any> {
 
         <ImageBloc>
           <ItemActions>
-            <ButtonAdd>+</ButtonAdd>
+            <ButtonQuantity
+              onClick={() =>
+                this.props.setQuantityProductInCart({
+                  product: this.props.product,
+                  operator: "+",
+                })
+              }
+            >
+              +
+            </ButtonQuantity>
             <QuantityProduct> {this.props.quantityProduct} </QuantityProduct>
-            <ButtonMinus>-</ButtonMinus>
+            <ButtonQuantity
+              onClick={() =>
+                this.props.setQuantityProductInCart({
+                  product: this.props.product,
+                  operator: "-",
+                })
+              }
+            >
+              -
+            </ButtonQuantity>
           </ItemActions>
 
-          <Images>
-            <img
-              src={this.props.product.gallery[0]}
-              width="200"
-              height="288"
-              alt="image"
-            />
+          <Images
+            theme={{ gallery: this.props.product.gallery[this.state.index] }}
+          >
+            <LeftArrow onClick={() => this.setState({ index: -1 })}>
+              ‹
+            </LeftArrow>
+            <RightArrow onClick={() => this.setState({ index: +1 })}>
+              ›
+            </RightArrow>
           </Images>
         </ImageBloc>
       </WrapperItemCart>
@@ -88,8 +116,12 @@ class CartItem extends React.Component<any> {
   }
 }
 
-const mapStateToProps = (state: Data) => ({});
+const mapStateToProps = (state: Data) => ({
+  quantityInCart: state.cart.quantity,
+});
 
 let WithProductDescriptionHoc = withHocDescription(CartItem);
 
-export default connect(mapStateToProps, null)(WithProductDescriptionHoc);
+export default connect(mapStateToProps, { setQuantityProductInCart })(
+  WithProductDescriptionHoc
+);

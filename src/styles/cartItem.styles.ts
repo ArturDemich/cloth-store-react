@@ -1,9 +1,9 @@
+import { url } from "inspector"
 import styled from "styled-components"
 
 
 
 export const WrapperItemCart = styled.div`
-
 border-bottom: 1px solid #E5E5E5;
 margin: 3px;
 justify-content: space-between;
@@ -32,16 +32,14 @@ display: flex;
 align-items: center;
 justify-content: center;
 font-size: 22px;
-
 font-family: 'Raleway';
 font-style: normal;
 font-weight: 500;
 font-size: 24px;
 line-height: 160%;
 color: #1D1F22;
-
 `
-export const ButtonAdd = styled.button`
+export const ButtonQuantity = styled.button`
 width: 45px;
 height: 45px;
 background: #FFFFFF;
@@ -49,17 +47,41 @@ font-size: 24px;
 color: #1D1F22;
 `
 
-export const ButtonMinus = styled.button`
-width: 45px;
-height: 45px;
-background: #FFFFFF;
-font-size: 24px;
-color: #1D1F22;
-`
+
 
 
 export const Images = styled.div`
 display: flex;
 align-content: center;
+width: 200px;
+height: 288px;
+background-size: cover;
+background-image: ${(props) => `url(${props.theme.gallery})`};
+`
+
+export const LeftArrow = styled.div`
+width: 24px;
+height: 24px;
+background: rgba(0, 0, 0, 0.73);
+cursor: pointer;
+align-self: end;
+margin-left: 128px;
+margin-bottom: 16px;
+color: #FFFFFF;
+text-align: center;
+font-size: 20px;
+`
+
+export const RightArrow = styled.div`
+width: 24px;
+height: 24px;
+background: rgba(0, 0, 0, 0.73);
+cursor: pointer;
+align-self: end;
+margin-left: 8px;
+margin-bottom: 16px;
+color: #FFFFFF;
+text-align: center;
+font-size: 20px;
 
 `
