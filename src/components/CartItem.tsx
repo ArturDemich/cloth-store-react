@@ -103,10 +103,22 @@ class CartItem extends React.Component<any, any> {
           <Images
             theme={{ gallery: this.props.product.gallery[this.state.index] }}
           >
-            <LeftArrow onClick={() => this.setState({ index: -1 })}>
+            <LeftArrow
+              onClick={() =>
+                this.setState((state: any) => ({
+                  index: (state.index = state.index - 1),
+                }))
+              }
+            >
               ‹
             </LeftArrow>
-            <RightArrow onClick={() => this.setState({ index: +1 })}>
+            <RightArrow
+              onClick={() =>
+                this.setState((state: any) => ({
+                  index: (state.index = state.index + 1),
+                }))
+              }
+            >
               ›
             </RightArrow>
           </Images>

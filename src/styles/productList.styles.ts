@@ -13,3 +13,7 @@ display: grid;
 grid-template-columns: repeat(3, 1fr);
 grid-auto-rows: 486px;
 `
+
+export const CategoryName = styled.h1`
+text-transform: capitalize;
+`

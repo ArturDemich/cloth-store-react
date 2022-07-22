@@ -118,21 +118,23 @@ export const dataSlice = createSlice({
         state.cart.quantity ++
         state.cart.tottal += action.payload.product.prices[0].amount
         } else {
-          products[existingProductIndex].quantityProduct = products[existingProductIndex].quantityProduct - 1
-          console.log('cart -', state.cart.products)
+          products[existingProductIndex].quantityProduct --
+          
           if(products[existingProductIndex].quantityProduct === 0) {
-            state.cart.products = [ ...products.filter(el => el.product.id === products[existingProductIndex].product.id)]
-            state.cart.quantity --
-            state.cart.tottal -= action.payload.product.prices[0].amount
-          }
-        state.cart.products = [ ...products]
+            products.splice(existingProductIndex, 1)
+            
+                       
+          } 
+          products[0] ? state.cart.products = [ ...products] : state.cart.products = initialState.cart.products
         state.cart.quantity --
         state.cart.tottal -= action.payload.product.prices[0].amount
         }
-
+        console.log('cart -', state.cart)
       }
 
     /*
+    [ ...products.filter(el => el.product.id === products[existingProductIndex].product.id)]
+
     removeWeatherCard(state, action: PayloadAction<{id: number}>){
       state.weathers = [...state.weathers.filter(el => el.id !== action.payload.id)]
       localStorage.setItem('weathers', JSON.stringify(state.weathers))

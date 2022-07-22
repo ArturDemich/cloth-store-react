@@ -45,6 +45,7 @@ line-height: 27px;
 display: flex;
 align-items: center;
 color: #1D1F22;
+text-transform: capitalize;
 `
 
 export const TextStrong = styled.div`

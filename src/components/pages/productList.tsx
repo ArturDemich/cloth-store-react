@@ -1,5 +1,9 @@
 import React from "react";
-import { GridContainer, Wrapper } from "../../styles/productList.styles";
+import {
+  CategoryName,
+  GridContainer,
+  Wrapper,
+} from "../../styles/productList.styles";
 import ProductCard from "../productCard";
 import { connect } from "react-redux";
 import { getCategoryThunk } from "../../storeg/thunks";
@@ -20,7 +24,7 @@ class ProductList extends React.Component<any, any> {
     console.log("productList", this.props.params);
     return (
       <Wrapper>
-        <h1> {this.props.categoryName} </h1>
+        <CategoryName>{this.props.categoryName}</CategoryName>
         <GridContainer>
           {this.props.products.map((elem: Product) => (
             <NavLink

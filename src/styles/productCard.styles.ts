@@ -33,6 +33,7 @@ line-height: 160%;
 display: flex;
 align-items: center;
 color: #1D1F22;
+text-transform: capitalize;
 `
 
 export const Price = styled.div`

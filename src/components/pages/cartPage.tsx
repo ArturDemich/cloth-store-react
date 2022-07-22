@@ -11,17 +11,23 @@ import {
 import CartItem from "../CartItem";
 
 class CartPage extends React.Component<any> {
+  componentDidUpdate(prevState: any) {
+    console.log(prevState);
+    if (prevState.quantity === 0) {
+      this.render();
+    }
+  }
   render() {
     return (
       <Wrapper>
         <Title>Cart</Title>
 
-        {this.props.cartItem[0].product.id ? (
-          this.props.cartItem.map((elem: any) => (
+        {this.props.cartItem.map((elem: any) =>
+          elem.product.id ? (
             <CartItem key={elem.product.id} {...elem} />
-          ))
-        ) : (
-          <Title>Your Cart is empty!</Title>
+          ) : (
+            <Title key="empty">Your Cart is empty!</Title>
+          )
         )}
 
         <Infoblock>

@@ -45,6 +45,7 @@ height: 45px;
 background: #FFFFFF;
 font-size: 24px;
 color: #1D1F22;
+cursor: pointer;
 `
 
 
