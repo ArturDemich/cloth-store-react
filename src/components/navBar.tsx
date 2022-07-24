@@ -13,11 +13,21 @@ import { connect } from "react-redux";
 import { getCategoriesNameThunk } from "../storeg/thunks";
 import { Data } from "../storeg/interfaces";
 import { withHocNavBar } from "./hocs/navBarHoc";
+import MiniCart from "./miniCart";
+import { Modal } from "react-overlays";
+import { Backdrop, ModalMiniCart } from "../styles/miniCart.styles";
 
 class NavBar extends React.Component<any, any> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      showMiniCart: false,
+    };
+  }
   componentDidMount() {
     this.props.getCategoriesNameThunk();
   }
+  renderBackdrop = (props: any) => <Backdrop {...props} />;
 
   render() {
     // console.log("NavBar", this.props.categoriesName);
@@ -36,9 +46,21 @@ class NavBar extends React.Component<any, any> {
           <img src={brandIcon} alt="brandIcon" width="41" height="41" />
           <Actions>
             <img src={$$} alt="$$img" />
-            <Link to="/product-cart">
+            {/* <Link to="/product-cart">
               <img src={emptyCart} alt="emptyCart" />
-            </Link>
+            </Link> */}
+            <img
+              src={emptyCart}
+              alt="emptyCart"
+              onClick={() => this.setState({ showMiniCart: true })}
+            />
+            <ModalMiniCart
+              show={this.state.showMiniCart}
+              renderBackdrop={this.renderBackdrop}
+              onHide={() => this.setState({ showMiniCart: false })}
+            >
+              <MiniCart />
+            </ModalMiniCart>
           </Actions>
         </Header>
 
