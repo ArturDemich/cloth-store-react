@@ -9,15 +9,9 @@ import {
   Title,
   Wrapper,
 } from "../styles/miniCart.styles";
-import CartItem from "./CartItem";
+import MiniCartItem from "./miniCartItem";
 
 class MiniCart extends React.Component<any> {
-  componentDidUpdate(prevState: any) {
-    console.log(prevState);
-    if (prevState.quantity === 0) {
-      this.render();
-    }
-  }
   render() {
     return (
       <Wrapper>
@@ -25,7 +19,7 @@ class MiniCart extends React.Component<any> {
 
         {this.props.cartItem.map((elem: any) =>
           elem.product.id ? (
-            <CartItem key={elem.product.id} {...elem} />
+            <MiniCartItem key={elem.product.id} {...elem} />
           ) : (
             <Title key="empty">Your Cart is empty!</Title>
           )
@@ -33,6 +27,7 @@ class MiniCart extends React.Component<any> {
 
         <Infoblock>
           <TextStrong>Tottal: ${Math.round(this.props.tottal)}</TextStrong>
+          <Button>View Bag</Button>
           <Button>Check Out</Button>
         </Infoblock>
       </Wrapper>

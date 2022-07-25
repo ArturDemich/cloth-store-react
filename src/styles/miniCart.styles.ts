@@ -81,6 +81,6 @@ flex-direction: column;
 align-items: flex-start;
 padding: 0px;
 width: 279px;
-height: 159px;
+
 
 `
