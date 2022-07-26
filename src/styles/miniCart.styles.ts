@@ -11,8 +11,8 @@ export const ModalMiniCart = styled(Modal)`
   background-color: white;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   padding: 16px;
-  top: 25px;
-  left: 800px;
+  top: 78px;
+  left: 1050px;
 `
 
 export const Backdrop = styled("div")`
@@ -46,21 +46,20 @@ align-self: start;
 
 export const Button = styled.button`
 display: flex;
-flex-direction: column;
-align-items: center;
+justify-content: center;
 padding: 15px 2px;
 width: 140px;
 height: 43px;
-background: #5ECE7B;
-border: 0;
+background: ${props => props.theme.background};
+border: ${props => props.theme.border};
 font-family: 'Raleway';
 font-style: normal;
 font-weight: 600;
 font-size: 14px;
 line-height: 120%;
-color: #FFFFFF;
+color: ${props => props.theme.color};
 text-transform: uppercase;
-margin-top: 1rem;
+cursor: pointer;
 `
 
 export const TextStrong = styled.div`
@@ -77,10 +76,14 @@ text-transform: capitalize;
 
 export const Infoblock = styled.div`
 display: flex;
-flex-direction: column;
-align-items: flex-start;
-padding: 0px;
-width: 279px;
-
-
+justify-content: space-between;
+width: 100%;
+margin-top: 3px;
+margin-bottom: 32px;
+`
+export const ButtonBlock = styled.div`
+display: flex;
+justify-content: space-between;
+width: 100%;
+margin-bottom: 12px;
 `

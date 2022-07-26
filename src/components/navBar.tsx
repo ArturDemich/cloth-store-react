@@ -4,6 +4,8 @@ import {
   Button,
   NavigationBar,
   Header,
+  ImageCart,
+  BadgeCart,
 } from "../styles/navBar.styles";
 import brandIcon from "../styles/icon/brandIcon.svg";
 import $$ from "../styles/icon/$$.svg";
@@ -46,14 +48,16 @@ class NavBar extends React.Component<any, any> {
           <img src={brandIcon} alt="brandIcon" width="41" height="41" />
           <Actions>
             <img src={$$} alt="$$img" />
-            {/* <Link to="/product-cart">
-              <img src={emptyCart} alt="emptyCart" />
-            </Link> */}
-            <img
-              src={emptyCart}
-              alt="emptyCart"
+
+            <ImageCart
+              theme={{ gallery: emptyCart }}
               onClick={() => this.setState({ showMiniCart: true })}
-            />
+            >
+              {this.props.quantityInCart !== 0 && (
+                <BadgeCart>{this.props.quantityInCart}</BadgeCart>
+              )}
+            </ImageCart>
+
             <ModalMiniCart
               show={this.state.showMiniCart}
               renderBackdrop={this.renderBackdrop}
@@ -75,6 +79,7 @@ class NavBar extends React.Component<any, any> {
 let mapStateToProps = (state: Data) => ({
   categoriesName: state.categories,
   categoruInputName: state.categoryInputName,
+  quantityInCart: state.cart.quantity,
 });
 
 let withHoc = withHocNavBar(NavBar);

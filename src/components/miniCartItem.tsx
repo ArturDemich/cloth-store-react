@@ -26,8 +26,9 @@ class MiniCartItem extends React.Component<any, any> {
     return (
       <WrapperItemCart>
         <AtributeBloc>
-          <Title>{this.props.product.name}</Title>
-          <p>{this.props.product.brand}</p>
+          <Title>
+            {this.props.product.name} <br></br> {this.props.product.brand}
+          </Title>
 
           <Price>{"$" + Math.round(this.props.product.prices[0].amount)}</Price>
 

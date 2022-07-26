@@ -17,18 +17,8 @@ display: flex;
 flex-direction: row;
 align-items: flex-start;
 height: 56px;
-//padding-left: 4rem;
 `
 
-/*export const Button = styled.button`
-text-transform: uppercase;
-font-family: 'Raleway';
-font-weight: 400;
-font-size: 16px;
-margin-right: 1rem;
-background-color: #FFFFFF;
-border: #FFFFFF;
-`*/
 
 export const Button = styled.button`
   text-decoration: none;
@@ -87,10 +77,34 @@ justify-content: flex-end;
 align-items: center;
 padding: 0px;
 gap: 22px;
-
 width: 204px;
 height: 40px;
 right: 101px;
 top: 23px;
-//padding-right: 5rem;
+`
+
+export const ImageCart = styled.div`
+display: flex;
+align-content: center;
+width: 20px;
+height: 20px;
+background-size: cover;
+background-image: ${(props) => `url(${props.theme.gallery})`};
+`
+export const BadgeCart = styled.div`
+background: #1D1F22;
+border-radius: 60px;
+width: 20px;
+height: 20px;
+color: #FFFFFF;
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+display: flex;
+justify-content: center;
+text-transform: uppercase;
+position: absolute;
+top: 29px;
+margin-left: 14px;
 `

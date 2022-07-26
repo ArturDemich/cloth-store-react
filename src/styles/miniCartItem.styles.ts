@@ -9,9 +9,11 @@ justify-content: space-between;
 width: 293px;
 height: 190px;
 display: flex;
+margin-top: 40px;
+
 `
 export const AtributeBloc = styled.div`
-padding: 1rem;
+
 `
 
 export const ImageBloc = styled.div`
@@ -24,7 +26,7 @@ padding-bottom: 24px;
 export const ItemActions = styled.div`
 display: flex;
 flex-direction: column;
-margin-right: 24px;
+margin-right: 8px;
 `
 export const QuantityProduct = styled.div`
 height: 142px;
@@ -46,6 +48,9 @@ background: #FFFFFF;
 font-size: 24px;
 color: #1D1F22;
 cursor: pointer;
+display: flex;
+justify-content: center;
+align-items: center;
 `
 export const Images = styled.div`
 display: flex;
@@ -68,6 +73,8 @@ display: flex;
 align-items: center;
 color: #1D1F22;
 text-transform: capitalize;
+margin-right: 4px;
+margin-bottom: 4px;
 `
 
 export const Price = styled.div`
@@ -77,6 +84,7 @@ font-weight: 500;
 font-size: 16px;
 line-height: 160%;
 color: #1D1F22;
+margin-bottom: 6px;
 `
 
 export const Text = styled.div`
@@ -86,14 +94,15 @@ font-weight: 400;
 font-size: 14px;
 line-height: 16px;
 color: #1D1F22;
-padding-top: 10px;
-text-transform: uppercase;
+text-transform: capitalize;
+margin-bottom: 8px;
 `
 
 export const Size = styled.div`
 display: flex;
 flex-direction: row;
 text-transform: uppercase;
+margin-bottom: 7px;
 `
 
 export const ButtonSize = styled.button`
@@ -102,7 +111,7 @@ height: 24px;
 font-family: 'Source Sans Pro';
 font-style: normal;
 font-weight: 400;
-font-size: 14px;
+font-size: xx-small;
 line-height: 160%;
 margin-right: 8px;
 display: flex;
@@ -122,7 +131,7 @@ export const ColorSquare = styled.button`
 width: 16px;
 height: 16px;
 background: ${props => props.theme.main};
-margin-left: 8px;
+margin-right: 8px;
 cursor: pointer;
 `
 
