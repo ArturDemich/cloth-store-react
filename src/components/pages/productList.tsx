@@ -3,7 +3,6 @@ import {
   CategoryName,
   GridContainer,
   Wrapper,
-  link,
 } from "../../styles/productList.styles";
 import ProductCard from "../productCard";
 import { connect } from "react-redux";
@@ -11,6 +10,7 @@ import { getCategoryThunk } from "../../storeg/thunks";
 import { Data, Product } from "../../storeg/interfaces";
 import { Link } from "react-router-dom";
 import { withHocList } from "../hocs/productListHoc";
+import { link } from "../../styles/link.styles";
 
 class ProductList extends React.Component<any, any> {
   componentDidMount() {

@@ -60,7 +60,7 @@ query getProduct($id: String!) {
           }
         }
         prices {
-            currency {label},
+            currency {label, symbol},
             amount
           },
         brand,

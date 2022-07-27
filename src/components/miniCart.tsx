@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Navigate } from "react-router";
 import { Link } from "react-router-dom";
 import { Data, ProductInCart } from "../storeg/interfaces";
+import { link } from "../styles/link.styles";
 import {
   Button,
   ButtonBlock,
@@ -11,7 +12,6 @@ import {
   Title,
   Wrapper,
 } from "../styles/miniCart.styles";
-import { link } from "../styles/productList.styles";
 import MiniCartItem from "./miniCartItem";
 
 class MiniCart extends React.Component<any> {

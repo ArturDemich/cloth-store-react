@@ -7,17 +7,17 @@ import {
   ImageCart,
   BadgeCart,
 } from "../styles/navBar.styles";
+import { link } from "../styles/link.styles";
 import brandIcon from "../styles/icon/brandIcon.svg";
-import $$ from "../styles/icon/$$.svg";
 import emptyCart from "../styles/icon/emptyCart.svg";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { connect } from "react-redux";
 import { getCategoriesNameThunk } from "../storeg/thunks";
 import { Data } from "../storeg/interfaces";
 import { withHocNavBar } from "./hocs/navBarHoc";
 import MiniCart from "./miniCart";
-import { Modal } from "react-overlays";
 import { Backdrop, ModalMiniCart } from "../styles/miniCart.styles";
+import DropdownMenu from "./dropdownMenu";
 
 class NavBar extends React.Component<any, any> {
   constructor(props: any) {
@@ -39,7 +39,7 @@ class NavBar extends React.Component<any, any> {
         <Header>
           <NavigationBar>
             {this.props.categoriesName.map((elem: any) => (
-              <NavLink key={elem.name} to={`/${elem.name}`}>
+              <NavLink style={link} key={elem.name} to={`/${elem.name}`}>
                 <Button>{elem.name}</Button>
               </NavLink>
             ))}
@@ -47,7 +47,7 @@ class NavBar extends React.Component<any, any> {
 
           <img src={brandIcon} alt="brandIcon" width="41" height="41" />
           <Actions>
-            <img src={$$} alt="$$img" />
+            <DropdownMenu />
 
             <ImageCart
               theme={{ gallery: emptyCart }}

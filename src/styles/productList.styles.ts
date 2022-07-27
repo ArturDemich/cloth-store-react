@@ -18,7 +18,4 @@ export const CategoryName = styled.h1`
 text-transform: capitalize;
 `
 
-export const link =  {
-    textDecoration: "none",
-    outline: "none"
-}
+ 
