@@ -30,7 +30,7 @@ class MiniCart extends React.Component<any> {
         )}
 
         <Infoblock>
-          <TextStrong>Tottal: </TextStrong>
+          <TextStrong>Tottal </TextStrong>
           <TextStrong> ${Math.round(this.props.tottal)}</TextStrong>
         </Infoblock>
         <ButtonBlock>

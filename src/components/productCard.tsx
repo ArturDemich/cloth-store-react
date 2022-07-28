@@ -11,6 +11,7 @@ import {
 
 class ProductCard extends React.Component<any, any> {
   render() {
+    console.log(this.props);
     return (
       <Wrapper
         theme={
@@ -26,7 +27,13 @@ class ProductCard extends React.Component<any, any> {
 
         <Content>
           <Title>{this.props.name}</Title>
-          <Price>${this.props.prices[0].amount}</Price>
+          {this.props.prices.map((el: any) =>
+            el.currency.label === this.props.currency.label ? (
+              <Price key={el.currency.label}>
+                {el.currency.symbol} {el.amount}
+              </Price>
+            ) : null
+          )}
         </Content>
       </Wrapper>
     );

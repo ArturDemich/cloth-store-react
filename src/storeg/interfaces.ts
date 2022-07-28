@@ -40,13 +40,14 @@ export interface CategoryName {
 export interface Currency {
     label: String
     symbol: String
-  }
+  } 
 
 export interface Data {
     categories: Categories[]
     category: Category
     product: Product
     currencies: Currency[]
+    currentCurrency: Currency
     categoryInputName: string  
     cart: Cart
   };

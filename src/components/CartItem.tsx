@@ -40,7 +40,13 @@ class CartItem extends React.Component<any, any> {
           <p>{this.props.product.brand}</p>
 
           <TextStrong>Price:</TextStrong>
-          <Price>{Math.round(this.props.product.prices[0].amount)}</Price>
+          {this.props.product.prices.map((el: any) =>
+            el.currency.label === this.props.currency ? (
+              <Price key={el.currency.label}>
+                {el.currency.symbol} {el.amount}
+              </Price>
+            ) : null
+          )}
 
           {this.props.size && (
             <>
@@ -130,6 +136,7 @@ class CartItem extends React.Component<any, any> {
 
 const mapStateToProps = (state: Data) => ({
   quantityInCart: state.cart.quantity,
+  currency: state.currentCurrency.label,
 });
 
 let WithProductDescriptionHoc = withHocDescription(CartItem);

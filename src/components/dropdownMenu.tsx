@@ -1,4 +1,6 @@
 import React from "react";
+import { getCurrencyThunk } from "../storeg/thunks";
+import { setCurrentCurrency } from "../storeg/dataSlice";
 import UpArrow from "../styles/icon/UpArrow.svg";
 import DownArrow from "../styles/icon/DownArrow.svg";
 import $ from "../styles/icon/$.svg";
@@ -20,20 +22,31 @@ class DropdownMenu extends React.Component<any, any> {
       isActive: false,
     };
   }
+
+  componentDidMount() {
+    this.props.getCurrencyThunk();
+  }
+
   render() {
     return (
       <Dropdown>
         <DropdownButton
           onClick={() => this.setState({ isActive: !this.state.isActive })}
         >
-          <LabelCurrencies theme={{ label: $ }} />
+          <LabelCurrencies>{this.props.currentCurrency.symbol}</LabelCurrencies>
           <Arrow theme={{ arrow: this.state.isActive ? DownArrow : UpArrow }} />
         </DropdownButton>
         {this.state.isActive && (
           <DropdownContetn>
             {this.props.currencies.map((elem: any) => (
-              <DropdownItem key={elem.currency.label}>
-                {elem.currency.symbol} {elem.currency.label}
+              <DropdownItem
+                key={elem.label}
+                onClick={() =>
+                  this.props.setCurrentCurrency(elem) &&
+                  this.setState({ isActive: !this.state.isActive })
+                }
+              >
+                {elem.symbol} {elem.label}
               </DropdownItem>
             ))}
           </DropdownContetn>
@@ -44,7 +57,11 @@ class DropdownMenu extends React.Component<any, any> {
 }
 
 let mapStateToProps = (state: Data) => ({
-  currencies: state.product.prices,
+  currencies: state.currencies,
+  currentCurrency: state.currentCurrency,
 });
 
-export default connect(mapStateToProps, null)(DropdownMenu);
+export default connect(mapStateToProps, {
+  getCurrencyThunk,
+  setCurrentCurrency,
+})(DropdownMenu);

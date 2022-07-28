@@ -110,7 +110,13 @@ class ProductDescription extends React.Component<any, any> {
           )}
 
           <TextStrong>Price:</TextStrong>
-          <Price>{this.props.location.prices[0].amount}</Price>
+          {this.props.prices.map((el: any) =>
+            el.currency.label === this.props.currency ? (
+              <Price key={el.currency.label}>
+                {el.currency.symbol} {el.amount}
+              </Price>
+            ) : null
+          )}
           <Button
             onClick={() =>
               this.props.setCartItems({
@@ -140,6 +146,7 @@ const mapStateToProps = (state: Data) => ({
   brand: state.product.brand,
   cart: state.cart,
   product: state.product,
+  currency: state.currentCurrency.label,
 });
 
 let WithUrlDataComponent = withHocDescription(ProductDescription);

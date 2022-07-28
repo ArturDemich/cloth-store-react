@@ -30,7 +30,13 @@ class MiniCartItem extends React.Component<any, any> {
             {this.props.product.name} <br></br> {this.props.product.brand}
           </Title>
 
-          <Price>{"$" + Math.round(this.props.product.prices[0].amount)}</Price>
+          {this.props.product.prices.map((el: any) =>
+            el.currency.label === this.props.currency ? (
+              <Price key={el.currency.label}>
+                {el.currency.symbol} {el.amount}
+              </Price>
+            ) : null
+          )}
 
           {this.props.size && (
             <>
@@ -99,6 +105,7 @@ class MiniCartItem extends React.Component<any, any> {
 
 const mapStateToProps = (state: Data) => ({
   quantityInCart: state.cart.quantity,
+  currency: state.currentCurrency.label,
 });
 
 let WithProductDescriptionHoc = withHocDescription(MiniCartItem);

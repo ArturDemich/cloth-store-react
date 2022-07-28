@@ -13,8 +13,10 @@ cursor: pointer;
 export const LabelCurrencies = styled.div`
 height: 30px;
 width: 30px;
-background-size: cover;
-background-image: ${(props) => `url(${props.theme.label})`};
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 18px;
 `
 
 export const Arrow = styled.div`

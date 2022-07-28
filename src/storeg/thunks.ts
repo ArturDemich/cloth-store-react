@@ -1,5 +1,5 @@
 import {DataService} from '../services/dataService';
-import { setCategoriesNames, setCategory, setProduct } from './dataSlice';
+import { setCategoriesNames, setCategory, setCurrency, setProduct } from './dataSlice';
 import { CategoryQuery } from './interfaces';
 import { AppDispatch } from './store';
 
@@ -32,6 +32,20 @@ export const getCategoryThunk = (payload: CategoryQuery) => async (dispatch: App
       }
   }
 
+
+  export const getCurrencyThunk = () => async (dispatch: AppDispatch) => {
+    try {     
+        const {data} = await DataService.getCurrencies(); 
+        if (data) {    
+            //console.log('thunkCurrency', data.currencies)       
+          dispatch(setCurrency(data.currencies));
+        } else {
+          console.log('Something went wrong!')
+        }
+      } catch (error) {
+        console.log(error);
+      }
+  }
 
   export const getProductThunk = (payload: string) => async (dispatch: AppDispatch) => {
     try {     

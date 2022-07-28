@@ -23,7 +23,7 @@ query getCategory($input: CategoryInput) {
           }
         }
         prices {
-            currency {label},
+            currency {label, symbol},
             amount
           },
         brand,
@@ -67,3 +67,12 @@ query getProduct($id: String!) {
     }
   }
 `;
+
+export const GET_CURRENCY = gql`
+query getCurrency {
+  currencies {
+    label,
+    symbol,
+  }
+}
+`

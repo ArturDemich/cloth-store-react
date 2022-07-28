@@ -36,7 +36,7 @@ class ProductList extends React.Component<any, any> {
   }
 
   render() {
-    console.log("productList", this.props.params);
+    console.log("productList", this.props);
     return (
       <Wrapper>
         <CategoryName>{this.props.categoryName}</CategoryName>
@@ -48,7 +48,11 @@ class ProductList extends React.Component<any, any> {
               to={`/product-description/${elem.id}`}
               state={elem}
             >
-              <ProductCard {...elem} inCart={this.checkCart(elem.id)} />
+              <ProductCard
+                {...elem}
+                inCart={this.checkCart(elem.id)}
+                currency={this.props.currentCurrency}
+              />
             </Link>
           ))}
         </GridContainer>
@@ -62,6 +66,7 @@ const mapStateToProps = (state: Data) => ({
   products: state.category.products,
   inputName: state.categoryInputName,
   productInCart: state.cart.products,
+  currentCurrency: state.currentCurrency,
   name: "tech",
 });
 

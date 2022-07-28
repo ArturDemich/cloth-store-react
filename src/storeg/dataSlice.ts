@@ -22,6 +22,10 @@ const initialState: Data = {
     products: []
   },
   currencies: [],
+  currentCurrency: {
+    symbol: '',
+    label: '',
+  },
   categoryInputName: '',
   cart: {
     products: [{
@@ -61,6 +65,17 @@ export const dataSlice = createSlice({
       action: PayloadAction<Categories[]>) {        
       state.categories = action.payload
      // console.log('slice', action.payload)      
+    },
+
+    setCurrency(state, action: PayloadAction<Currency[]>) {
+      //console.log('sliceCurrency', action.payload)
+      state.currencies = action.payload
+      state.currentCurrency = action.payload[0]
+    },
+
+    setCurrentCurrency(state, action: PayloadAction<Currency>) {      
+      state.currentCurrency = action.payload      
+      //console.log('sliceCCurrency', state.currentCurrency)
     },
 
     setCategoryName(
@@ -145,5 +160,6 @@ export const dataSlice = createSlice({
   },
 });
 
-export const { setCategory, setCategoriesNames, setCategoryName, setProduct, setCartItems, setQuantityProductInCart } = dataSlice.actions;
+export const { setCategory, setCategoriesNames, setCategoryName, setProduct, 
+  setCartItems, setQuantityProductInCart, setCurrency, setCurrentCurrency } = dataSlice.actions;
 export default dataSlice.reducer;

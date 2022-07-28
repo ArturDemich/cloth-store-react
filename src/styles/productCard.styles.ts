@@ -44,7 +44,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 padding: 0px;
-width: 58px;
+width: auto;
 height: 29px;
 color: #1D1F22;
 `
