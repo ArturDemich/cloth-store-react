@@ -34,7 +34,7 @@ class DropdownMenu extends React.Component<any, any> {
           onClick={() => this.setState({ isActive: !this.state.isActive })}
         >
           <LabelCurrencies>{this.props.currentCurrency.symbol}</LabelCurrencies>
-          <Arrow theme={{ arrow: this.state.isActive ? DownArrow : UpArrow }} />
+          <Arrow theme={{ arrow: this.state.isActive ? UpArrow : DownArrow }} />
         </DropdownButton>
         {this.state.isActive && (
           <DropdownContetn>

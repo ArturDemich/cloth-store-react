@@ -57,7 +57,9 @@ display: flex;
 align-content: center;
 width: 121px;
 height: 190px;
-background-size: cover;
+background-size: 121px;
+background-position-y: center;
+background-repeat: no-repeat;
 background-image: ${(props) => `url(${props.theme.gallery})`};
 `
 

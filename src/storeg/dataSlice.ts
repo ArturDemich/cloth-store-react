@@ -93,6 +93,25 @@ export const dataSlice = createSlice({
       //console.log('sliceProduct', action.payload)      
     },
 
+    setTottalCart(
+      state,
+      action: PayloadAction<any>) {
+        const products: ProductInCart[] = state.cart.products
+        state.cart.tottal = 0
+        
+        products.forEach((elem) => {     
+                       
+          elem.product.prices.forEach((price) => {
+            if(price.currency.label === action.payload) {
+              console.log(action.payload)
+              
+              state.cart.tottal += price.amount * elem.quantityProduct
+            }
+          })
+        })
+
+      },
+
     setCartItems(
       state,
       action: PayloadAction<ProductInCart>) {
@@ -113,7 +132,7 @@ export const dataSlice = createSlice({
           }
           
         state.cart.quantity ++
-        state.cart.tottal += action.payload.product.prices[0].amount
+        //state.cart.tottal += action.payload.product.prices[0].amount
       
 
       //localStorage.setItem('itemCart', JSON.stringify(state.cart.products))     
@@ -131,7 +150,7 @@ export const dataSlice = createSlice({
         products[existingProductIndex].quantityProduct = products[existingProductIndex].quantityProduct + 1
         state.cart.products = [ ...products]
         state.cart.quantity ++
-        state.cart.tottal += action.payload.product.prices[0].amount
+        //state.cart.tottal += action.payload.product.prices[0].amount
         } else {
           products[existingProductIndex].quantityProduct --
           
@@ -142,7 +161,7 @@ export const dataSlice = createSlice({
           } 
           products[0] ? state.cart.products = [ ...products] : state.cart.products = initialState.cart.products
         state.cart.quantity --
-        state.cart.tottal -= action.payload.product.prices[0].amount
+        //state.cart.tottal -= action.payload.product.prices[0].amount
         }
         console.log('cart -', state.cart)
       }
@@ -161,5 +180,5 @@ export const dataSlice = createSlice({
 });
 
 export const { setCategory, setCategoriesNames, setCategoryName, setProduct, 
-  setCartItems, setQuantityProductInCart, setCurrency, setCurrentCurrency } = dataSlice.actions;
+  setCartItems, setQuantityProductInCart, setCurrency, setCurrentCurrency, setTottalCart } = dataSlice.actions;
 export default dataSlice.reducer;

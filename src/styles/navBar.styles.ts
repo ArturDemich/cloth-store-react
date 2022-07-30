@@ -1,5 +1,13 @@
 import styled from "styled-components"
 
+export const link =  {
+  textDecorationLine: "none",
+  marginRight: "1rem",
+  color: "#000",
+  fontWeight: "400",
+  padding: "0px 7px",
+}
+
 export const Header = styled.div`
 display: flex;
 background-color: #FFFFFF;
@@ -17,57 +25,29 @@ display: flex;
 flex-direction: row;
 align-items: flex-start;
 height: 56px;
+.active{
+  color: #5ECE7B !important;
+  border-bottom: 3px solid #5ECE7B;
+  font-weight: 600 !important;
+  
+}
 `
 
 
-export const Button = styled.button`
-  text-decoration: none;
+export const Button = styled.button`  
   position: relative;
   display: block;
   padding: 16px 0;
   font-family: 'Raleway';
-  font-weight: 400;
+  font-weight: inherit;
   font-size: 16px;
-  margin-right: 1rem;
   background-color: #FFFFFF;
   border: #FFFFFF; 
   text-transform: uppercase;
-  transition: color 0.1s, background-color 0.1s;
-  color: #000;
+  color: inherit;
   padding-top: 0;
+  cursor: pointer;
 
-:hover {
-  color: #5ECE7B;
-}
-:focus, a:active {
-  color: #5ECE7B;
-}
-::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 130%;
-  height: 2px;
-  width: 110%;
-  background-color: #5ECE7B;
-  -webkit-transform-origin: center top;
-          transform-origin: center top;
-  -webkit-transform: scale(0, 1);
-          transform: scale(0, 1);
-  transition: color 0.1s, -webkit-transform 0.2s ease-out;
-  transition: color 0.1s, transform 0.2s ease-out;
-  transition: color 0.1s, transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
-}
-:active::before {
-  background-color: #5ECE7B;
-}
-:hover::before,
-:focus::before {
-  -webkit-transform-origin: center top;
-          transform-origin: center top;
-  -webkit-transform: scale(1, 1);
-          transform: scale(1, 1);
-}
 `
 
 export const Actions = styled.div`
@@ -86,10 +66,12 @@ top: 23px;
 export const ImageCart = styled.div`
 display: flex;
 align-content: center;
-width: 20px;
+width: 21px;
 height: 20px;
-background-size: cover;
+background-repeat: no-repeat;
+background-size: 20px;
 background-image: ${(props) => `url(${props.theme.gallery})`};
+cursor: pointer;
 `
 export const BadgeCart = styled.div`
 background: #1D1F22;
@@ -108,3 +90,4 @@ position: absolute;
 top: 29px;
 margin-left: 14px;
 `
+

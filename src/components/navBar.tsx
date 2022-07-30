@@ -7,12 +7,13 @@ import {
   ImageCart,
   BadgeCart,
 } from "../styles/navBar.styles";
-import { link } from "../styles/link.styles";
+import { link } from "../styles/navBar.styles";
 import brandIcon from "../styles/icon/brandIcon.svg";
 import emptyCart from "../styles/icon/emptyCart.svg";
 import { NavLink, Outlet } from "react-router-dom";
 import { connect } from "react-redux";
 import { getCategoriesNameThunk } from "../storeg/thunks";
+import { setTottalCart } from "../storeg/dataSlice";
 import { Data } from "../storeg/interfaces";
 import { withHocNavBar } from "./hocs/navBarHoc";
 import MiniCart from "./miniCart";
@@ -29,7 +30,18 @@ class NavBar extends React.Component<any, any> {
   componentDidMount() {
     this.props.getCategoriesNameThunk();
   }
+
+  componentDidUpdate(prevState: any) {
+    if (
+      prevState.quantityInCart !== this.props.quantityInCart ||
+      prevState.currentCurrency !== this.props.currentCurrency
+    ) {
+      this.props.setTottalCart(this.props.currentCurrency);
+    }
+  }
+
   renderBackdrop = (props: any) => <Backdrop {...props} />;
+  hideModal = () => this.setState({ showMiniCart: false });
 
   render() {
     // console.log("NavBar", this.props.categoriesName);
@@ -61,9 +73,9 @@ class NavBar extends React.Component<any, any> {
             <ModalMiniCart
               show={this.state.showMiniCart}
               renderBackdrop={this.renderBackdrop}
-              onHide={() => this.setState({ showMiniCart: false })}
+              onHide={this.hideModal}
             >
-              <MiniCart />
+              <MiniCart hideModal={this.hideModal} />
             </ModalMiniCart>
           </Actions>
         </Header>
@@ -80,10 +92,12 @@ let mapStateToProps = (state: Data) => ({
   categoriesName: state.categories,
   categoruInputName: state.categoryInputName,
   quantityInCart: state.cart.quantity,
+  currentCurrency: state.currentCurrency.label,
 });
 
 let withHoc = withHocNavBar(NavBar);
 
 export default connect(mapStateToProps, {
   getCategoriesNameThunk,
+  setTottalCart,
 })(withHoc);

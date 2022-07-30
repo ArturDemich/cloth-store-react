@@ -32,10 +32,14 @@ class CartPage extends React.Component<any> {
 
         <Infoblock>
           <TextStrong>
-            Tax21%: ${Math.round(this.props.tottal * 0.21)}
+            Tax21%: {this.props.currencySymbol}
+            {Math.round(this.props.tottal * 0.21)}
           </TextStrong>
           <TextStrong>Quantity: {this.props.quantity} </TextStrong>
-          <TextStrong>Tottal: ${Math.round(this.props.tottal)}</TextStrong>
+          <TextStrong>
+            Tottal: {this.props.currencySymbol}
+            {Math.round(this.props.tottal)}
+          </TextStrong>
           <Button>Order</Button>
         </Infoblock>
       </Wrapper>
@@ -47,6 +51,7 @@ const mapStateToProps = (state: Data) => ({
   cartItem: state.cart.products,
   quantity: state.cart.quantity,
   tottal: state.cart.tottal,
+  currencySymbol: state.currentCurrency.symbol,
 });
 
 export default connect(mapStateToProps, null)(CartPage);

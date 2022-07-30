@@ -56,7 +56,8 @@ display: flex;
 align-content: center;
 width: 200px;
 height: 288px;
-background-size: cover;
+background-repeat: no-repeat;
+background-size: 210px;
 background-image: ${(props) => `url(${props.theme.gallery})`};
 `
 

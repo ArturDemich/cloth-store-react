@@ -4,6 +4,7 @@ import { Navigate } from "react-router";
 import { Link } from "react-router-dom";
 import { Data, ProductInCart } from "../storeg/interfaces";
 import { link } from "../styles/link.styles";
+import { setTottalCart } from "../storeg/dataSlice";
 import {
   Button,
   ButtonBlock,
@@ -14,7 +15,7 @@ import {
 } from "../styles/miniCart.styles";
 import MiniCartItem from "./miniCartItem";
 
-class MiniCart extends React.Component<any> {
+class MiniCart extends React.Component<any, any> {
   render() {
     console.log(this.props);
     return (
@@ -31,7 +32,11 @@ class MiniCart extends React.Component<any> {
 
         <Infoblock>
           <TextStrong>Tottal </TextStrong>
-          <TextStrong> ${Math.round(this.props.tottal)}</TextStrong>
+          <TextStrong>
+            {" "}
+            {this.props.currencySymbol}
+            {Math.round(this.props.tottal)}
+          </TextStrong>
         </Infoblock>
         <ButtonBlock>
           <Link to="/product-cart" style={link}>
@@ -41,13 +46,14 @@ class MiniCart extends React.Component<any> {
                 color: "#1D1F22",
                 border: "1px solid #1D1F22",
               }}
-              onClick={() => this.setState({ showMiniCart: false })}
+              onClick={this.props.hideModal}
             >
               View Bag
             </Button>
           </Link>
           <Button
             theme={{ background: "#5ECE7B;", color: "#FFFFFF", border: "0" }}
+            onClick={() => this.props.setTottalCart("GBP")}
           >
             Check Out
           </Button>
@@ -61,6 +67,7 @@ const mapStateToProps = (state: Data) => ({
   cartItem: state.cart.products,
   quantity: state.cart.quantity,
   tottal: state.cart.tottal,
+  currencySymbol: state.currentCurrency.symbol,
 });
 
-export default connect(mapStateToProps, null)(MiniCart);
+export default connect(mapStateToProps, { setTottalCart })(MiniCart);

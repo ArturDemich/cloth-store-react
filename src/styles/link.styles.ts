@@ -1,5 +1,5 @@
 
 export const link =  {
-    textDecoration: "none",
-    outline: "none"
+    textDecorationLine: "none",
+    
 }
