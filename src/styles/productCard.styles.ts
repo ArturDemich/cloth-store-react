@@ -39,7 +39,7 @@ color: #1D1F22;
 text-transform: capitalize;
 `
 
-export const Price = styled.div`
+export const PriceWrap = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -54,6 +54,8 @@ display: flex;
 align-content: center;
 width: 356px;
 height: 338px;
+background-repeat: no-repeat;
+background-position-x: center;
 background-size: cover;
 background-image: ${(props) => `url(${props.theme.gallery})`};
 `

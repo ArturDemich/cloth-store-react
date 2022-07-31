@@ -17,12 +17,21 @@ margin-right: 3rem;
 export const Img = styled.div`
 margin-bottom: 2rem;
 cursor: pointer;
-
+width: 80px;
+height: 80px;
+background-repeat: no-repeat;
+background-position-x: center;
+background-size: contain;
+background-image: ${(props) => `url(${props.theme.gallery})`}
 `
 export const MainImage = styled.div`
 margin-right: 8rem;
 width: 610px;
 height: 511px;
+background-repeat: no-repeat;
+background-position-x: center;
+background-size: contain;
+background-image: ${(props) => `url(${props.theme.gallery})`};
 `
 
 export const Action = styled.div`
@@ -114,7 +123,7 @@ margin: 2px;
 cursor: pointer;
 `
 
-export const Price = styled.div`
+export const PriceWrap = styled.div`
 margin-top: 1rem;
 margin-bottom: 1rem;
 font-family: 'Raleway';

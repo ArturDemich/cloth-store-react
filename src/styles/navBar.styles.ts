@@ -87,7 +87,7 @@ display: flex;
 justify-content: center;
 text-transform: uppercase;
 position: absolute;
-top: 29px;
+top: 20px;
 margin-left: 14px;
 `
 

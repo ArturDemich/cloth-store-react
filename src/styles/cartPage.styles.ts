@@ -8,6 +8,7 @@ display: flex;
 flex-direction: column;
 padding-left: 4rem;
 padding-top: 2rem;
+padding-bottom: 150px;
 max-width: 1240px;
 `
 

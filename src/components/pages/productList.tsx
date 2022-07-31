@@ -7,24 +7,25 @@ import {
 import ProductCard from "../productCard";
 import { connect } from "react-redux";
 import { getCategoryThunk } from "../../storeg/thunks";
-import { Data, Product } from "../../storeg/interfaces";
+import { Data, Product, ProductInCart } from "../../storeg/interfaces";
 import { Link } from "react-router-dom";
 import { withHocList } from "../hocs/productListHoc";
 import { link } from "../../styles/link.styles";
+import { PropsProductList } from "./interfaces";
 
-class ProductList extends React.Component<any, any> {
+class ProductList extends React.Component<PropsProductList> {
   componentDidMount() {
     this.props.getCategoryThunk(this.props.params.categoryName);
   }
-  componentDidUpdate(prevState: any) {
+  componentDidUpdate(prevState: PropsProductList) {
     if (prevState.params.categoryName !== this.props.params.categoryName) {
       this.props.getCategoryThunk(this.props.params.categoryName);
     }
   }
 
-  checkCart(props: any) {
+  checkCart(props: string) {
     const existingProductIndex: number = this.props.productInCart.findIndex(
-      (value: any) => {
+      (value: ProductInCart) => {
         return value.product.id === props;
       }
     );
@@ -36,7 +37,7 @@ class ProductList extends React.Component<any, any> {
   }
 
   render() {
-    console.log("productList", this.props);
+    //console.log("productList", this.props);
     return (
       <Wrapper>
         <CategoryName>{this.props.categoryName}</CategoryName>

@@ -9,20 +9,16 @@ import {
   Wrapper,
 } from "../../styles/cartPage.styles";
 import CartItem from "../CartItem";
+import { PropsCartPage } from "./interfaces";
 
-class CartPage extends React.Component<any> {
-  componentDidUpdate(prevState: any) {
-    console.log(prevState);
-    if (prevState.quantity === 0) {
-      this.render();
-    }
-  }
+class CartPage extends React.Component<PropsCartPage> {
   render() {
+    //console.log("props", this.props);
     return (
       <Wrapper>
         <Title>Cart</Title>
 
-        {this.props.cartItem.map((elem: any) =>
+        {this.props.cartItem.map((elem: ProductInCart) =>
           elem.product.id ? (
             <CartItem key={elem.product.id} {...elem} />
           ) : (
@@ -38,7 +34,7 @@ class CartPage extends React.Component<any> {
           <TextStrong>Quantity: {this.props.quantity} </TextStrong>
           <TextStrong>
             Tottal: {this.props.currencySymbol}
-            {Math.round(this.props.tottal)}
+            {this.props.tottal.toFixed(2)}
           </TextStrong>
           <Button>Order</Button>
         </Infoblock>
@@ -54,4 +50,4 @@ const mapStateToProps = (state: Data) => ({
   currencySymbol: state.currentCurrency.symbol,
 });
 
-export default connect(mapStateToProps, null)(CartPage);
+export default connect(mapStateToProps)(CartPage);

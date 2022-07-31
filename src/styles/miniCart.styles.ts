@@ -33,6 +33,25 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 `
+
+export const ScrollWrap = styled.div`
+overflow-y: auto;
+scroll-behavior: smooth;
+min-height: auto;
+max-height: 420px;
+::-webkit-scrollbar {
+  width: 4px;  
+}
+::-webkit-scrollbar-track {
+  background: #FFFFFF;  
+  border-radius: 4px;  
+}
+::-webkit-scrollbar-thumb {
+  background: #9e9e9e;
+  border-radius: 4px;  
+}
+`
+
 export const Title = styled.div`
 font-family: 'Raleway';
 font-style: normal;

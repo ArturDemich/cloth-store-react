@@ -9,21 +9,25 @@ import {
   Images,
   Img,
   MainImage,
-  Price,
+  PriceWrap,
   Size,
   TextStrong,
   Title,
   Wrapper,
 } from "../../styles/productDescription.styles";
 import { connect } from "react-redux";
-import { Data } from "../../storeg/interfaces";
+import { Attribute, Data, Price } from "../../storeg/interfaces";
 import { withHocDescription } from "../hocs/productDescriptionHoc";
 import parse from "html-react-parser";
 import { getProductThunk } from "../../storeg/thunks";
 import { setCartItems } from "../../storeg/dataSlice";
+import { PropsDescription, StateDescription } from "./interfaces";
 
-class ProductDescription extends React.Component<any, any> {
-  constructor(props: any) {
+class ProductDescription extends React.Component<
+  PropsDescription,
+  StateDescription
+> {
+  constructor(props: PropsDescription) {
     super(props);
     this.state = {
       image: this.props.gallery[0],
@@ -32,7 +36,7 @@ class ProductDescription extends React.Component<any, any> {
   componentDidMount() {
     this.props.getProductThunk(this.props.params.productId);
   }
-  componentDidUpdate(prevState: any) {
+  componentDidUpdate(prevState: PropsDescription) {
     if (prevState.id !== this.props.id) {
       this.setState({ image: this.props.gallery[0] });
     }
@@ -41,32 +45,19 @@ class ProductDescription extends React.Component<any, any> {
   parse = require("html-react-parser");
 
   render() {
-    console.log("props", this.props);
+    // console.log("props", this.props);
     return (
       <Wrapper>
         <Images>
           {this.props.gallery.map((el: string) => (
-            <Img key={el}>
-              <img
-                src={el}
-                width="80"
-                height="80"
-                alt="image"
-                onClick={(el) =>
-                  this.setState({ image: el.currentTarget.currentSrc })
-                }
-              />
-            </Img>
+            <Img
+              key={el}
+              theme={{ gallery: el }}
+              onClick={() => this.setState({ image: el })}
+            ></Img>
           ))}
         </Images>
-        <MainImage>
-          <img
-            src={this.state.image}
-            width="610"
-            height="510"
-            alt="MainImage"
-          />
-        </MainImage>
+        <MainImage theme={{ gallery: this.state.image }}></MainImage>
 
         <Action>
           <Title>{this.props.name}</Title>
@@ -76,7 +67,7 @@ class ProductDescription extends React.Component<any, any> {
             <>
               <TextStrong>{this.props.sizeName}</TextStrong>
               <Size>
-                {this.props.size.map((size: any) => (
+                {this.props.size.map((size: Attribute) => (
                   <ButtonSize key={size.id}>{size.value}</ButtonSize>
                 ))}
               </Size>
@@ -86,7 +77,7 @@ class ProductDescription extends React.Component<any, any> {
             <>
               <TextStrong>{this.props.capacityName}</TextStrong>
               <Size>
-                {this.props.capacity.map((elem: any) => (
+                {this.props.capacity.map((elem: Attribute) => (
                   <ButtonSize
                     key={elem.id}
                     onClick={() => console.log(this.props.cart)}
@@ -102,7 +93,7 @@ class ProductDescription extends React.Component<any, any> {
             <>
               <TextStrong>{this.props.colorName}</TextStrong>
               <Color>
-                {this.props.color.map((elem: any) => (
+                {this.props.color.map((elem: Attribute) => (
                   <ColorSquare key={elem.id} theme={{ main: elem.value }} />
                 ))}
               </Color>
@@ -110,11 +101,11 @@ class ProductDescription extends React.Component<any, any> {
           )}
 
           <TextStrong>Price:</TextStrong>
-          {this.props.prices.map((el: any) =>
+          {this.props.prices.map((el: Price) =>
             el.currency.label === this.props.currency ? (
-              <Price key={el.currency.label}>
+              <PriceWrap key={el.currency.label}>
                 {el.currency.symbol} {el.amount}
-              </Price>
+              </PriceWrap>
             ) : null
           )}
           <Button

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Data } from "../storeg/interfaces";
+import { Attribute, Data, Price } from "../storeg/interfaces";
 import { withHocDescription } from "./hocs/productDescriptionHoc";
 import { setQuantityProductInCart } from "../storeg/dataSlice";
 import {
@@ -18,21 +18,22 @@ import {
   ButtonSize,
   Color,
   ColorSquare,
-  Price,
+  PriceWrap,
   Size,
   TextStrong,
   Title,
 } from "../styles/productDescription.styles";
+import { PropsCartItem, StateCartItem } from "./interfaces";
 
-class CartItem extends React.Component<any, any> {
-  constructor(props: any) {
+class CartItem extends React.Component<PropsCartItem, StateCartItem> {
+  constructor(props: PropsCartItem) {
     super(props);
     this.state = {
       index: 0,
     };
   }
   render() {
-    console.log("cartItem", this.props);
+    //console.log("cartItem", this.props);
     return (
       <WrapperItemCart>
         <AtributeBloc>
@@ -40,11 +41,11 @@ class CartItem extends React.Component<any, any> {
           <p>{this.props.product.brand}</p>
 
           <TextStrong>Price:</TextStrong>
-          {this.props.product.prices.map((el: any) =>
+          {this.props.product.prices.map((el: Price) =>
             el.currency.label === this.props.currency ? (
-              <Price key={el.currency.label}>
+              <PriceWrap key={el.currency.label}>
                 {el.currency.symbol} {el.amount}
-              </Price>
+              </PriceWrap>
             ) : null
           )}
 
@@ -52,7 +53,7 @@ class CartItem extends React.Component<any, any> {
             <>
               <TextStrong>{this.props.sizeName}</TextStrong>
               <Size>
-                {this.props.size.map((size: any) => (
+                {this.props.size.map((size: Attribute) => (
                   <ButtonSize key={size.id}>{size.value}</ButtonSize>
                 ))}
               </Size>
@@ -62,7 +63,7 @@ class CartItem extends React.Component<any, any> {
             <>
               <TextStrong>{this.props.capacityName}</TextStrong>
               <Size>
-                {this.props.capacity.map((elem: any) => (
+                {this.props.capacity.map((elem: Attribute) => (
                   <ButtonSize key={elem.id}>{elem.displayValue}</ButtonSize>
                 ))}
               </Size>
@@ -73,7 +74,7 @@ class CartItem extends React.Component<any, any> {
             <>
               <TextStrong>{this.props.colorName}</TextStrong>
               <Color>
-                {this.props.color.map((elem: any) => (
+                {this.props.color.map((elem: Attribute) => (
                   <ColorSquare key={elem.id} theme={{ main: elem.value }} />
                 ))}
               </Color>
@@ -111,7 +112,7 @@ class CartItem extends React.Component<any, any> {
           >
             <LeftArrow
               onClick={() =>
-                this.setState((state: any) => ({
+                this.setState((state: StateCartItem) => ({
                   index: (state.index = state.index - 1),
                 }))
               }
@@ -120,7 +121,7 @@ class CartItem extends React.Component<any, any> {
             </LeftArrow>
             <RightArrow
               onClick={() =>
-                this.setState((state: any) => ({
+                this.setState((state: StateCartItem) => ({
                   index: (state.index = state.index + 1),
                 }))
               }

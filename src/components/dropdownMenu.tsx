@@ -13,10 +13,14 @@ import {
   LabelCurrencies,
 } from "../styles/dropdownMenu.styles";
 import { connect } from "react-redux";
-import { Data } from "../storeg/interfaces";
+import { Currency, Data } from "../storeg/interfaces";
+import { PropsDropdownMenu, StateDropdownMenu } from "./interfaces";
 
-class DropdownMenu extends React.Component<any, any> {
-  constructor(props: any) {
+class DropdownMenu extends React.Component<
+  PropsDropdownMenu,
+  StateDropdownMenu
+> {
+  constructor(props: PropsDropdownMenu) {
     super(props);
     this.state = {
       isActive: false,
@@ -28,6 +32,7 @@ class DropdownMenu extends React.Component<any, any> {
   }
 
   render() {
+    //console.log("props", this.props);
     return (
       <Dropdown>
         <DropdownButton
@@ -38,7 +43,7 @@ class DropdownMenu extends React.Component<any, any> {
         </DropdownButton>
         {this.state.isActive && (
           <DropdownContetn>
-            {this.props.currencies.map((elem: any) => (
+            {this.props.currencies.map((elem: Currency) => (
               <DropdownItem
                 key={elem.label}
                 onClick={() =>

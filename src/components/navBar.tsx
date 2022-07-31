@@ -14,14 +14,15 @@ import { NavLink, Outlet } from "react-router-dom";
 import { connect } from "react-redux";
 import { getCategoriesNameThunk } from "../storeg/thunks";
 import { setTottalCart } from "../storeg/dataSlice";
-import { Data } from "../storeg/interfaces";
+import { Categories, Data } from "../storeg/interfaces";
 import { withHocNavBar } from "./hocs/navBarHoc";
 import MiniCart from "./miniCart";
 import { Backdrop, ModalMiniCart } from "../styles/miniCart.styles";
 import DropdownMenu from "./dropdownMenu";
+import { PropsNavBar, StateNavBar } from "./interfaces";
 
-class NavBar extends React.Component<any, any> {
-  constructor(props: any) {
+class NavBar extends React.Component<PropsNavBar, StateNavBar> {
+  constructor(props: PropsNavBar) {
     super(props);
     this.state = {
       showMiniCart: false,
@@ -31,7 +32,7 @@ class NavBar extends React.Component<any, any> {
     this.props.getCategoriesNameThunk();
   }
 
-  componentDidUpdate(prevState: any) {
+  componentDidUpdate(prevState: PropsNavBar) {
     if (
       prevState.quantityInCart !== this.props.quantityInCart ||
       prevState.currentCurrency !== this.props.currentCurrency
@@ -44,13 +45,13 @@ class NavBar extends React.Component<any, any> {
   hideModal = () => this.setState({ showMiniCart: false });
 
   render() {
-    // console.log("NavBar", this.props.categoriesName);
+    //console.log("NavBar", this.props);
 
     return (
       <>
         <Header>
           <NavigationBar>
-            {this.props.categoriesName.map((elem: any) => (
+            {this.props.categoriesName.map((elem: Categories) => (
               <NavLink style={link} key={elem.name} to={`/${elem.name}`}>
                 <Button>{elem.name}</Button>
               </NavLink>
@@ -95,9 +96,9 @@ let mapStateToProps = (state: Data) => ({
   currentCurrency: state.currentCurrency.label,
 });
 
-let withHoc = withHocNavBar(NavBar);
+//let withHoc = withHocNavBar(NavBar);
 
 export default connect(mapStateToProps, {
   getCategoriesNameThunk,
   setTottalCart,
-})(withHoc);
+})(NavBar);

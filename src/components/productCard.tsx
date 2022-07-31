@@ -1,17 +1,19 @@
 import React from "react";
+import { Price } from "../storeg/interfaces";
 import {
   CartIcon,
   Content,
   ImageCard,
-  Price,
+  PriceWrap,
   StockOut,
   Title,
   Wrapper,
 } from "../styles/productCard.styles";
+import { PropsProductCard } from "./interfaces";
 
-class ProductCard extends React.Component<any, any> {
+class ProductCard extends React.Component<PropsProductCard> {
   render() {
-    console.log(this.props);
+    //console.log(this.props);
     return (
       <Wrapper
         theme={
@@ -27,11 +29,11 @@ class ProductCard extends React.Component<any, any> {
 
         <Content>
           <Title>{this.props.name}</Title>
-          {this.props.prices.map((el: any) =>
+          {this.props.prices.map((el: Price) =>
             el.currency.label === this.props.currency.label ? (
-              <Price key={el.currency.label}>
+              <PriceWrap key={el.currency.label}>
                 {el.currency.symbol} {el.amount}
-              </Price>
+              </PriceWrap>
             ) : null
           )}
         </Content>

@@ -79,7 +79,7 @@ margin-right: 4px;
 margin-bottom: 4px;
 `
 
-export const Price = styled.div`
+export const PriceWrap = styled.div`
 font-family: 'Raleway';
 font-style: normal;
 font-weight: 500;

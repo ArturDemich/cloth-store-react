@@ -4,26 +4,26 @@ export interface  Price {
     amount: number
   }
 export interface Attribute {
-    displayValue: String
-    value: String
-    id: String
+    displayValue: string
+    value: string
+    id: string
 }
 export interface AttributeSet {
-    id: String
-    name: String
-    type: String
+    id: string
+    name: string
+    type: string
     items: [Attribute]
   }
 export interface Product {
-    id: String,
-    name: String,
-    inStock: Boolean,
-    gallery: [String],
-    description: String,
-    category: String,
+    id: string,
+    name: string,
+    inStock: boolean,
+    gallery: string[],
+    description: string,
+    category: string,
     attributes: AttributeSet[],
     prices: Price[],
-    brand: String
+    brand: string
     
 }
 export interface Categories {
@@ -31,15 +31,15 @@ export interface Categories {
     __typename: string    
 }
 export interface Category {
-    name: String
+    name: string
     products: Product[]
   }  
 export interface CategoryName {
     categoryName: string
 }
 export interface Currency {
-    label: String
-    symbol: String
+    label: string
+    symbol: string
   } 
 
 export interface Data {

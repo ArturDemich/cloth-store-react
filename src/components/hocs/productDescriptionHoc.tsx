@@ -1,9 +1,8 @@
 import React from "react";
-import { useLocation, useParams } from "react-router";
+import { useParams } from "react-router";
 
 export const withHocDescription = (WrappedComponent: any) => (props: any) => {
   const params = useParams();
-  const location = useLocation();
 
   const color: any = [];
   let colorName: any = "";
@@ -39,7 +38,6 @@ export const withHocDescription = (WrappedComponent: any) => (props: any) => {
     <WrappedComponent
       {...props}
       params={params}
-      location={location.state}
       color={color}
       size={size}
       capacity={capacity}

@@ -6,6 +6,8 @@ font-family: 'Raleway';
 font-style: normal;
 padding-left: 3rem;
 padding-right: 3rem;
+padding-bottom: 191px;
+
 `
 
 export const GridContainer = styled.div`

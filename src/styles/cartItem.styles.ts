@@ -1,4 +1,3 @@
-import { url } from "inspector"
 import styled from "styled-components"
 
 
@@ -47,9 +46,6 @@ font-size: 24px;
 color: #1D1F22;
 cursor: pointer;
 `
-
-
-
 
 export const Images = styled.div`
 display: flex;

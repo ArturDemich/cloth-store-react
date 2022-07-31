@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Data } from "../storeg/interfaces";
+import { Attribute, Data, Price } from "../storeg/interfaces";
 import { withHocDescription } from "./hocs/productDescriptionHoc";
 import { setQuantityProductInCart } from "../storeg/dataSlice";
 import {
@@ -14,13 +14,14 @@ import {
   ButtonSize,
   Color,
   ColorSquare,
-  Price,
+  PriceWrap,
   Size,
   Text,
   Title,
 } from "../styles/miniCartItem.styles";
+import { PropsMiniCartItem } from "./interfaces";
 
-class MiniCartItem extends React.Component<any, any> {
+class MiniCartItem extends React.Component<PropsMiniCartItem> {
   render() {
     console.log("minicartItem", this.props);
     return (
@@ -30,11 +31,11 @@ class MiniCartItem extends React.Component<any, any> {
             {this.props.product.name} <br></br> {this.props.product.brand}
           </Title>
 
-          {this.props.product.prices.map((el: any) =>
+          {this.props.product.prices.map((el: Price) =>
             el.currency.label === this.props.currency ? (
-              <Price key={el.currency.label}>
+              <PriceWrap key={el.currency.label}>
                 {el.currency.symbol} {el.amount}
-              </Price>
+              </PriceWrap>
             ) : null
           )}
 
@@ -42,7 +43,7 @@ class MiniCartItem extends React.Component<any, any> {
             <>
               <Text>{this.props.sizeName}</Text>
               <Size>
-                {this.props.size.map((size: any) => (
+                {this.props.size.map((size: Attribute) => (
                   <ButtonSize key={size.id}>{size.value}</ButtonSize>
                 ))}
               </Size>
@@ -52,7 +53,7 @@ class MiniCartItem extends React.Component<any, any> {
             <>
               <Text>{this.props.capacityName}</Text>
               <Size>
-                {this.props.capacity.map((elem: any) => (
+                {this.props.capacity.map((elem: Attribute) => (
                   <ButtonSize key={elem.id}>{elem.displayValue}</ButtonSize>
                 ))}
               </Size>
@@ -63,7 +64,7 @@ class MiniCartItem extends React.Component<any, any> {
             <>
               <Text>{this.props.colorName}</Text>
               <Color>
-                {this.props.color.map((elem: any) => (
+                {this.props.color.map((elem: Attribute) => (
                   <ColorSquare key={elem.id} theme={{ main: elem.value }} />
                 ))}
               </Color>

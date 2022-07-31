@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Navigate } from "react-router";
 import { Link } from "react-router-dom";
 import { Data, ProductInCart } from "../storeg/interfaces";
 import { link } from "../styles/link.styles";
@@ -9,33 +8,35 @@ import {
   Button,
   ButtonBlock,
   Infoblock,
+  ScrollWrap,
   TextStrong,
   Title,
   Wrapper,
 } from "../styles/miniCart.styles";
 import MiniCartItem from "./miniCartItem";
+import { PropsMiniCart } from "./interfaces";
 
-class MiniCart extends React.Component<any, any> {
+class MiniCart extends React.Component<PropsMiniCart> {
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <Wrapper>
         <Title>My Bag, {this.props.quantity} items </Title>
-
-        {this.props.cartItem.map((elem: any) =>
-          elem.product.id ? (
-            <MiniCartItem key={elem.product.id} {...elem} />
-          ) : (
-            <Title key="empty">Your Cart is empty!</Title>
-          )
-        )}
+        <ScrollWrap>
+          {this.props.cartItem.map((elem: ProductInCart) =>
+            elem.product.id ? (
+              <MiniCartItem key={elem.product.id} {...elem} />
+            ) : (
+              <Title key="empty">Your Cart is empty!</Title>
+            )
+          )}
+        </ScrollWrap>
 
         <Infoblock>
           <TextStrong>Tottal </TextStrong>
           <TextStrong>
-            {" "}
             {this.props.currencySymbol}
-            {Math.round(this.props.tottal)}
+            {this.props.tottal.toFixed(2)}
           </TextStrong>
         </Infoblock>
         <ButtonBlock>
@@ -53,7 +54,6 @@ class MiniCart extends React.Component<any, any> {
           </Link>
           <Button
             theme={{ background: "#5ECE7B;", color: "#FFFFFF", border: "0" }}
-            onClick={() => this.props.setTottalCart("GBP")}
           >
             Check Out
           </Button>

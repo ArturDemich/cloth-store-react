@@ -1,4 +1,8 @@
 body {
-    display: flex;
-    justify-content: center;
+    max-width: max-content;
+    margin: auto;
+}
+
+#root {
+    width: 1440px;
 }
