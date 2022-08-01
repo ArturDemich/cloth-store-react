@@ -105,10 +105,17 @@ margin-right: 1rem;
 display: flex;
 justify-content: center;
 align-items: center;
-background: #FFFFFF;
+background: ${props => props.theme.background};
+color: ${props => props.theme.color};
 text-transform: uppercase;
 cursor: pointer;
 `
+ButtonSize.defaultProps = {    
+    theme: {
+        background: "#FFFFFF",
+        color: "#1D1F22",
+    }
+}
 
 export const Color = styled.div`
 display: flex;
@@ -121,7 +128,13 @@ height: 32px;
 background: ${props => props.theme.main};
 margin: 2px;
 cursor: pointer;
+border: ${props => props.theme.border};
 `
+ColorSquare.defaultProps = {
+    theme:{
+        border: "none"
+    }
+}
 
 export const PriceWrap = styled.div`
 margin-top: 1rem;

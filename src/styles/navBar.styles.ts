@@ -45,7 +45,7 @@ export const Button = styled.button`
   border: #FFFFFF; 
   text-transform: uppercase;
   color: inherit;
-  padding-top: 0;
+  padding-top: 20px;
   cursor: pointer;
 
 `

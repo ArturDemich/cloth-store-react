@@ -13,9 +13,13 @@ const initialState: Data = {
     gallery: [''],
     description: '',
     category: '',
+    brand: '',
     attributes: [],
     prices: [],
-    brand: '',    
+    selectedColor: '',
+    selectedSize: '',
+    selectedCopacity: '',
+        
   },
   category: {
     name: '',
@@ -36,9 +40,13 @@ const initialState: Data = {
         gallery: [''],
         description: '',
         category: '',
+        brand: '',
         attributes: [],
         prices: [],
-        brand: '',        
+        selectedColor: '',
+        selectedSize: '',
+        selectedCopacity: '',
+                
       },
       quantityProduct: 0
     }],    
@@ -51,7 +59,7 @@ export const dataSlice = createSlice({
   name: 'data_from_endpoint',
   initialState,
   reducers: {
-    
+     
     setCategory(
       state,
       action: PayloadAction<Category>) {        
@@ -65,6 +73,27 @@ export const dataSlice = createSlice({
       action: PayloadAction<Categories[]>) {        
       state.categories = action.payload
      // console.log('slice', action.payload)      
+    },
+
+    setSelectedCopacity(
+      state,
+      action: PayloadAction<string>) {        
+      state.product.selectedCopacity = action.payload
+      console.log('slice', state.product.selectedCopacity)      
+    },
+
+    setSelectedSize(
+      state,
+      action: PayloadAction<string>) {        
+      state.product.selectedSize = action.payload
+      console.log('slice', state.product.selectedSize)      
+    },
+
+    setSelectedColor(
+      state,
+      action: PayloadAction<string>) {        
+      state.product.selectedColor = action.payload
+      console.log('slice', state.product.selectedColor)      
     },
 
     setCurrency(state, action: PayloadAction<Currency[]>) {
@@ -103,7 +132,7 @@ export const dataSlice = createSlice({
                        
           elem.product.prices.forEach((price) => {
             if(price.currency.label === action.payload) {
-              console.log(action.payload)
+              //console.log(action.payload)
               
               state.cart.tottal += price.amount * elem.quantityProduct
             }
@@ -115,7 +144,7 @@ export const dataSlice = createSlice({
     setCartItems(
       state,
       action: PayloadAction<ProductInCart>) {
-        console.log('sliceCartItems', action.payload)
+        //console.log('sliceCartItems', action.payload)
 
         const products: ProductInCart[] = state.cart.products        
         const existingProductIndex: number = products.findIndex((value) =>{
@@ -163,7 +192,7 @@ export const dataSlice = createSlice({
         state.cart.quantity --
         //state.cart.tottal -= action.payload.product.prices[0].amount
         }
-        console.log('cart -', state.cart)
+       // console.log('cart -', state.cart)
       }
 
     /*
@@ -179,6 +208,9 @@ export const dataSlice = createSlice({
   },
 });
 
-export const { setCategory, setCategoriesNames, setCategoryName, setProduct, 
-  setCartItems, setQuantityProductInCart, setCurrency, setCurrentCurrency, setTottalCart } = dataSlice.actions;
+export const { setCategory, setCategoriesNames, 
+  setCategoryName, setProduct, 
+  setCartItems, setQuantityProductInCart, 
+  setCurrency, setCurrentCurrency, 
+  setTottalCart, setSelectedCopacity, setSelectedSize, setSelectedColor } = dataSlice.actions;
 export default dataSlice.reducer;

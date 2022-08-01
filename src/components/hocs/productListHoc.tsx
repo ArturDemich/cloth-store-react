@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 
 export const withHocList = (WrappedComponent: any) => (props: any) => {
   const params = useParams();

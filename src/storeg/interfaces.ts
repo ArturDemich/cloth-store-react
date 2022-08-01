@@ -14,6 +14,8 @@ export interface AttributeSet {
     type: string
     items: [Attribute]
   }
+
+ 
 export interface Product {
     id: string,
     name: string,
@@ -21,10 +23,12 @@ export interface Product {
     gallery: string[],
     description: string,
     category: string,
+    brand: string,
     attributes: AttributeSet[],
     prices: Price[],
-    brand: string
-    
+    selectedSize: string,
+    selectedColor: string,
+    selectedCopacity: string,    
 }
 export interface Categories {
     name: string,
@@ -51,10 +55,6 @@ export interface Data {
     categoryInputName: string  
     cart: Cart
   };
-
-  export interface CategoryQuery {    
-      query: any 
-  }
 
   export interface CategoryInput {
     query: any 

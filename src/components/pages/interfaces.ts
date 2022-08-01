@@ -22,8 +22,15 @@ export interface PropsDescription {
     prices: Price[]
     product: Product
     setCartItems: (action: ProductInCart) => void
+    setSelectedColor: (action: string) => void
+    setSelectedSize: (action: string) => void
+    setSelectedCopacity: (action: string) => void
     size: Attribute[]
     sizeName: string
+    selectedCopacity: string
+    selectedColor: string
+    selectedSize: string
+       
   }
 
 export interface StateDescription {

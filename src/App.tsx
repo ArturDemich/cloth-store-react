@@ -11,7 +11,7 @@ import { Wrapper } from "./styles/app.stales";
 import { getCategoryThunk, getCategoriesNameThunk } from "./storeg/thunks";
 import { Data } from "./storeg/interfaces";
 
-class App extends React.Component<any, any> {
+class App extends React.Component {
   render() {
     // console.log("App", this.props.categoriesName);
     return (
