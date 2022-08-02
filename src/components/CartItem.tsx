@@ -33,7 +33,7 @@ class CartItem extends React.Component<PropsCartItem, StateCartItem> {
     };
   }
   render() {
-    //console.log("cartItem", this.props);
+    console.log("cartItem", this.props);
     return (
       <WrapperItemCart>
         <AtributeBloc>
@@ -53,8 +53,17 @@ class CartItem extends React.Component<PropsCartItem, StateCartItem> {
             <>
               <TextStrong>{this.props.sizeName}</TextStrong>
               <Size>
-                {this.props.size.map((size: Attribute) => (
-                  <ButtonSize key={size.id}>{size.value}</ButtonSize>
+                {this.props.size.map((elem: Attribute) => (
+                  <ButtonSize
+                    theme={
+                      this.props.product.selectedSize === elem.id
+                        ? { background: "#1D1F22", color: "#FFFFFF" }
+                        : null
+                    }
+                    key={elem.id}
+                  >
+                    {elem.value}
+                  </ButtonSize>
                 ))}
               </Size>
             </>
@@ -64,7 +73,16 @@ class CartItem extends React.Component<PropsCartItem, StateCartItem> {
               <TextStrong>{this.props.capacityName}</TextStrong>
               <Size>
                 {this.props.capacity.map((elem: Attribute) => (
-                  <ButtonSize key={elem.id}>{elem.displayValue}</ButtonSize>
+                  <ButtonSize
+                    theme={
+                      this.props.product.selectedCopacity === elem.id
+                        ? { background: "#1D1F22", color: "#FFFFFF" }
+                        : null
+                    }
+                    key={elem.id}
+                  >
+                    {elem.displayValue}
+                  </ButtonSize>
                 ))}
               </Size>
             </>
@@ -75,7 +93,14 @@ class CartItem extends React.Component<PropsCartItem, StateCartItem> {
               <TextStrong>{this.props.colorName}</TextStrong>
               <Color>
                 {this.props.color.map((elem: Attribute) => (
-                  <ColorSquare key={elem.id} theme={{ main: elem.value }} />
+                  <ColorSquare
+                    key={elem.id}
+                    theme={
+                      this.props.product.selectedColor === elem.id
+                        ? { main: elem.value, border: "3px solid #5ECE7B" }
+                        : { main: elem.value }
+                    }
+                  />
                 ))}
               </Color>
             </>

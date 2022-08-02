@@ -78,7 +78,7 @@ height: 52px;
 left: 929px;
 top: 560px;
 background: #5ECE7B;
-border: 0;
+border-color: #5ECE7B;
 font-family: 'Raleway';
 font-style: normal;
 font-weight: 600;

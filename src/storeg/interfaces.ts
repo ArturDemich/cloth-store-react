@@ -15,7 +15,10 @@ export interface AttributeSet {
     items: [Attribute]
   }
 
- 
+  export interface ActionAttribute {
+    attributId: string,
+    name: string,
+   }
 export interface Product {
     id: string,
     name: string,

@@ -119,10 +119,18 @@ margin-right: 8px;
 display: flex;
 justify-content: center;
 align-items: center;
-background: #FFFFFF;
+background: ${props => props.theme.background};
+color: ${props => props.theme.color};
 text-transform: uppercase;
 cursor: pointer;
 `
+ButtonSize.defaultProps = {    
+    theme: {
+        background: "#FFFFFF",
+        color: "#1D1F22",
+    }
+}
+
 
 export const Color = styled.div`
 display: flex;
@@ -133,7 +141,13 @@ export const ColorSquare = styled.button`
 width: 16px;
 height: 16px;
 background: ${props => props.theme.main};
+border: ${props => props.theme.border};
 margin-right: 8px;
 cursor: pointer;
 `
+ColorSquare.defaultProps = {
+    theme:{
+        border: "none"
+    }
+}
 

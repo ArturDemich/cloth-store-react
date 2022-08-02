@@ -20,13 +20,9 @@ import { Attribute, Data, Price } from "../../storeg/interfaces";
 import { withHocDescription } from "../hocs/productDescriptionHoc";
 import parse from "html-react-parser";
 import { getProductThunk } from "../../storeg/thunks";
-import {
-  setCartItems,
-  setSelectedColor,
-  setSelectedSize,
-  setSelectedCopacity,
-} from "../../storeg/dataSlice";
+import { setCartItems, setSelectedAttribute } from "../../storeg/dataSlice";
 import { PropsDescription, StateDescription } from "./interfaces";
+import { FromAttribute } from "../enums";
 
 class ProductDescription extends React.Component<
   PropsDescription,
@@ -72,17 +68,22 @@ class ProductDescription extends React.Component<
             <>
               <TextStrong>{this.props.sizeName}</TextStrong>
               <Size>
-                {this.props.size.map((size: Attribute) => (
+                {this.props.size.map((elem: Attribute) => (
                   <ButtonSize
                     theme={
-                      this.props.selectedSize === size.id
+                      this.props.selectedSize === elem.id
                         ? { background: "#1D1F22", color: "#FFFFFF" }
                         : null
                     }
-                    key={size.id}
-                    onClick={() => this.props.setSelectedSize(size.id)}
+                    key={elem.id}
+                    onClick={() =>
+                      this.props.setSelectedAttribute({
+                        attributId: elem.id,
+                        name: FromAttribute.size,
+                      })
+                    }
                   >
-                    {size.value}
+                    {elem.value}
                   </ButtonSize>
                 ))}
               </Size>
@@ -100,7 +101,12 @@ class ProductDescription extends React.Component<
                         : null
                     }
                     key={elem.id}
-                    onClick={() => this.props.setSelectedCopacity(elem.id)}
+                    onClick={() =>
+                      this.props.setSelectedAttribute({
+                        attributId: elem.id,
+                        name: FromAttribute.copacity,
+                      })
+                    }
                   >
                     {elem.displayValue}
                   </ButtonSize>
@@ -121,7 +127,12 @@ class ProductDescription extends React.Component<
                         ? { main: elem.value, border: "3px solid #5ECE7B" }
                         : { main: elem.value }
                     }
-                    onClick={() => this.props.setSelectedColor(elem.id)}
+                    onClick={() =>
+                      this.props.setSelectedAttribute({
+                        attributId: elem.id,
+                        name: FromAttribute.color,
+                      })
+                    }
                   />
                 ))}
               </Color>
@@ -137,6 +148,7 @@ class ProductDescription extends React.Component<
             ) : null
           )}
           <Button
+            disabled={this.props.inStock ? true : false}
             onClick={() =>
               this.props.setCartItems({
                 product: this.props.product,
@@ -144,7 +156,7 @@ class ProductDescription extends React.Component<
               })
             }
           >
-            Add to Cart
+            {this.props.inStock ? "Out of stock" : "Add to Cart"}
           </Button>
           <Description>{parse(this.props.description)}</Description>
         </Action>
@@ -176,7 +188,5 @@ let WithUrlDataComponent = withHocDescription(ProductDescription);
 export default connect(mapStateToProps, {
   getProductThunk,
   setCartItems,
-  setSelectedColor,
-  setSelectedCopacity,
-  setSelectedSize,
+  setSelectedAttribute,
 })(WithUrlDataComponent);

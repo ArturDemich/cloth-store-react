@@ -78,6 +78,9 @@ setQuantityProductInCart: (action: setQuantityInCart) => void
 size: Attribute[]
 sizeName: string
 capacityName: string
+selectedCopacity: string
+selectedColor: string
+selectedSize: string
 }
 
 export interface StateCartItem {

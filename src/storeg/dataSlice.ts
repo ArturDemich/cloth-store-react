@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { FromAttribute } from '../components/enums';
 import ProductCard from '../components/productCard';
-import { Categories, Category, CategoryName, Currency, Data, Product, ProductInCart, setQuantityInCart } from './interfaces';
+import { ActionAttribute, Categories, Category, CategoryName, Currency, Data, Product, ProductInCart, setQuantityInCart } from './interfaces';
 
 
 
@@ -75,26 +76,20 @@ export const dataSlice = createSlice({
      // console.log('slice', action.payload)      
     },
 
-    setSelectedCopacity(
+    setSelectedAttribute(
       state,
-      action: PayloadAction<string>) {        
-      state.product.selectedCopacity = action.payload
+      action: PayloadAction<ActionAttribute>) {   
+        if(action.payload.name === FromAttribute.copacity) {
+          state.product.selectedCopacity = action.payload.attributId
+        }else if(action.payload.name === FromAttribute.color) {
+          state.product.selectedColor = action.payload.attributId
+        } else if(action.payload.name === FromAttribute.size) {
+          state.product.selectedSize = action.payload.attributId
+        }    
+      
       console.log('slice', state.product.selectedCopacity)      
     },
-
-    setSelectedSize(
-      state,
-      action: PayloadAction<string>) {        
-      state.product.selectedSize = action.payload
-      console.log('slice', state.product.selectedSize)      
-    },
-
-    setSelectedColor(
-      state,
-      action: PayloadAction<string>) {        
-      state.product.selectedColor = action.payload
-      console.log('slice', state.product.selectedColor)      
-    },
+    
 
     setCurrency(state, action: PayloadAction<Currency[]>) {
       //console.log('sliceCurrency', action.payload)
@@ -212,5 +207,5 @@ export const { setCategory, setCategoriesNames,
   setCategoryName, setProduct, 
   setCartItems, setQuantityProductInCart, 
   setCurrency, setCurrentCurrency, 
-  setTottalCart, setSelectedCopacity, setSelectedSize, setSelectedColor } = dataSlice.actions;
+  setTottalCart, setSelectedAttribute, } = dataSlice.actions;
 export default dataSlice.reducer;

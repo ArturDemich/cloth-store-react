@@ -43,8 +43,17 @@ class MiniCartItem extends React.Component<PropsMiniCartItem> {
             <>
               <Text>{this.props.sizeName}</Text>
               <Size>
-                {this.props.size.map((size: Attribute) => (
-                  <ButtonSize key={size.id}>{size.value}</ButtonSize>
+                {this.props.size.map((elem: Attribute) => (
+                  <ButtonSize
+                    theme={
+                      this.props.product.selectedSize === elem.id
+                        ? { background: "#1D1F22", color: "#FFFFFF" }
+                        : null
+                    }
+                    key={elem.id}
+                  >
+                    {elem.value}
+                  </ButtonSize>
                 ))}
               </Size>
             </>
@@ -54,7 +63,16 @@ class MiniCartItem extends React.Component<PropsMiniCartItem> {
               <Text>{this.props.capacityName}</Text>
               <Size>
                 {this.props.capacity.map((elem: Attribute) => (
-                  <ButtonSize key={elem.id}>{elem.displayValue}</ButtonSize>
+                  <ButtonSize
+                    theme={
+                      this.props.product.selectedCopacity === elem.id
+                        ? { background: "#1D1F22", color: "#FFFFFF" }
+                        : null
+                    }
+                    key={elem.id}
+                  >
+                    {elem.displayValue}
+                  </ButtonSize>
                 ))}
               </Size>
             </>
@@ -65,7 +83,14 @@ class MiniCartItem extends React.Component<PropsMiniCartItem> {
               <Text>{this.props.colorName}</Text>
               <Color>
                 {this.props.color.map((elem: Attribute) => (
-                  <ColorSquare key={elem.id} theme={{ main: elem.value }} />
+                  <ColorSquare
+                    key={elem.id}
+                    theme={
+                      this.props.product.selectedColor === elem.id
+                        ? { main: elem.value, border: "3px solid #5ECE7B" }
+                        : { main: elem.value }
+                    }
+                  />
                 ))}
               </Color>
             </>

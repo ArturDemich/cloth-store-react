@@ -1,5 +1,5 @@
 import { Attributes } from "html-react-parser/lib/attributes-to-props"
-import { Attribute, Cart, Currency, Price, Product, ProductInCart } from "../../storeg/interfaces"
+import { ActionAttribute, Attribute, Cart, Currency, Price, Product, ProductInCart } from "../../storeg/interfaces"
 
 
 export interface PropsDescription {
@@ -22,9 +22,7 @@ export interface PropsDescription {
     prices: Price[]
     product: Product
     setCartItems: (action: ProductInCart) => void
-    setSelectedColor: (action: string) => void
-    setSelectedSize: (action: string) => void
-    setSelectedCopacity: (action: string) => void
+    setSelectedAttribute: (action: ActionAttribute) => void
     size: Attribute[]
     sizeName: string
     selectedCopacity: string
