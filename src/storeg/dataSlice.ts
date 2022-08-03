@@ -85,9 +85,7 @@ export const dataSlice = createSlice({
           state.product.selectedColor = action.payload.attributId
         } else if(action.payload.name === FromAttribute.size) {
           state.product.selectedSize = action.payload.attributId
-        }    
-      
-      console.log('slice', state.product.selectedCopacity)      
+        }         
     },
     
 
@@ -123,42 +121,44 @@ export const dataSlice = createSlice({
         const products: ProductInCart[] = state.cart.products
         state.cart.tottal = 0
         
-        products.forEach((elem) => {     
-                       
+        products.forEach((elem) => {                            
           elem.product.prices.forEach((price) => {
-            if(price.currency.label === action.payload) {
-              //console.log(action.payload)
-              
+            if(price.currency.label === action.payload) {             
               state.cart.tottal += price.amount * elem.quantityProduct
             }
           })
         })
-
       },
+
 
     setCartItems(
       state,
-      action: PayloadAction<ProductInCart>) {
-        //console.log('sliceCartItems', action.payload)
-
+      action: PayloadAction<ProductInCart>) {        
         const products: ProductInCart[] = state.cart.products        
         const existingProductIndex: number = products.findIndex((value) =>{
           return value.product.id === action.payload.product.id
         })
-
         if(existingProductIndex === -1 && !state.cart.products[0].product.id) {                    
             state.cart.products = [action.payload] 
           } else if(existingProductIndex === -1 && state.cart.products[0].product.id) {
             state.cart.products = [...products, action.payload] 
           } else {
-            products[existingProductIndex].quantityProduct = products[existingProductIndex].quantityProduct + 1
-            state.cart.products = [ ...products]
-          }
-          
+            for( let elem of products) {
+              if(elem.product.id === action.payload.product.id &&
+                elem.product.selectedColor === action.payload.product.selectedColor) {
+                  if(elem.product.selectedCopacity === action.payload.product.selectedCopacity) {
+                    if(elem.product.selectedSize === action.payload.product.selectedSize) {
+                      elem.quantityProduct = elem.quantityProduct + 1
+                      state.cart.products = [ ...products]
+                    }
+                  }
+              } else {
+                state.cart.products = [...products, action.payload]
+              }
+            }
+          }          
         state.cart.quantity ++
-        //state.cart.tottal += action.payload.product.prices[0].amount
-      
-
+        
       //localStorage.setItem('itemCart', JSON.stringify(state.cart.products))     
     },
 
@@ -169,25 +169,19 @@ export const dataSlice = createSlice({
         const existingProductIndex: number = products.findIndex((value) =>{
           return value.product.id === action.payload.product.id
         })
-
         if(action.payload.operator === '+') {
         products[existingProductIndex].quantityProduct = products[existingProductIndex].quantityProduct + 1
         state.cart.products = [ ...products]
-        state.cart.quantity ++
-        //state.cart.tottal += action.payload.product.prices[0].amount
+        state.cart.quantity ++       
         } else {
           products[existingProductIndex].quantityProduct --
           
           if(products[existingProductIndex].quantityProduct === 0) {
-            products.splice(existingProductIndex, 1)
-            
-                       
+            products.splice(existingProductIndex, 1) 
           } 
           products[0] ? state.cart.products = [ ...products] : state.cart.products = initialState.cart.products
-        state.cart.quantity --
-        //state.cart.tottal -= action.payload.product.prices[0].amount
-        }
-       // console.log('cart -', state.cart)
+        state.cart.quantity --        
+        }       
       }
 
     /*

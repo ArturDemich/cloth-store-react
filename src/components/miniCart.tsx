@@ -17,6 +17,15 @@ import MiniCartItem from "./miniCartItem";
 import { PropsMiniCart } from "./interfaces";
 
 class MiniCart extends React.Component<PropsMiniCart> {
+  keyCount: number;
+  constructor(props: PropsMiniCart) {
+    super(props);
+    this.keyCount = 0;
+  }
+
+  getKey() {
+    return this.keyCount++;
+  }
   render() {
     // console.log(this.props);
     return (
@@ -25,7 +34,7 @@ class MiniCart extends React.Component<PropsMiniCart> {
         <ScrollWrap>
           {this.props.cartItem.map((elem: ProductInCart) =>
             elem.product.id ? (
-              <MiniCartItem key={elem.product.id} {...elem} />
+              <MiniCartItem key={this.getKey()} {...elem} />
             ) : (
               <Title key="empty">Your Cart is empty!</Title>
             )

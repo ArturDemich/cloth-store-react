@@ -12,6 +12,15 @@ import CartItem from "../CartItem";
 import { PropsCartPage } from "./interfaces";
 
 class CartPage extends React.Component<PropsCartPage> {
+  keyCount: number;
+  constructor(props: PropsCartPage) {
+    super(props);
+    this.keyCount = 0;
+  }
+
+  getKey() {
+    return this.keyCount++;
+  }
   render() {
     //console.log("props", this.props);
     return (
@@ -20,7 +29,7 @@ class CartPage extends React.Component<PropsCartPage> {
 
         {this.props.cartItem.map((elem: ProductInCart) =>
           elem.product.id ? (
-            <CartItem key={elem.product.id} {...elem} />
+            <CartItem key={this.getKey()} {...elem} />
           ) : (
             <Title key="empty">Your Cart is empty!</Title>
           )

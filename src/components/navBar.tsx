@@ -45,7 +45,7 @@ class NavBar extends React.Component<PropsNavBar, StateNavBar> {
   hideModal = () => this.setState({ showMiniCart: false });
 
   render() {
-    //console.log("NavBar", this.props);
+    console.log("NavBar", this.props);
 
     return (
       <>
