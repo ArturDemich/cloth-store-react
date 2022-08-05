@@ -9,10 +9,12 @@ currentCurrency: string
 getCategoriesNameThunk: () => void
 quantityInCart: number
 setTottalCart: (action: string) => void
+setCartFromLS: () => void
 }
 
 export interface StateNavBar {
     showMiniCart: boolean
+    loged: boolean
 }
 
 export interface PropsProductCard {

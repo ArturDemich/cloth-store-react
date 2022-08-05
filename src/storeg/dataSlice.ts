@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FromAttribute } from '../components/enums';
 import ProductCard from '../components/productCard';
-import { ActionAttribute, Categories, Category, CategoryName, Currency, Data, Product, ProductInCart, setQuantityInCart } from './interfaces';
+import { ActionAttribute, Cart, Categories, Category, CategoryName, Currency, Data, Product, ProductInCart, setQuantityInCart } from './interfaces';
 
 
 
 const initialState: Data = {
-  categories: [],
+  categories: [{name: '', __typename: ''}],
   product: {
     id: '',
     name: '',
@@ -65,8 +65,7 @@ export const dataSlice = createSlice({
       state,
       action: PayloadAction<Category>) {        
       state.category = action.payload
-      //console.log('sliceCategory', action.payload)
-      //localStorage.setItem('weathers', JSON.stringify(state.weathers))
+      //console.log('sliceCategory', action.payload)     
     },
 
     setCategoriesNames(
@@ -100,12 +99,12 @@ export const dataSlice = createSlice({
       //console.log('sliceCCurrency', state.currentCurrency)
     },
 
-    setCategoryName(
+   /*  setCategoryName(
       state,
       action: PayloadAction<Data['categoryInputName']>) {        
       state.categoryInputName = action.payload
       //console.log('sliceName', state.categoryInputName)      
-    },
+    }, */
 
     
     setProduct(
@@ -157,17 +156,20 @@ export const dataSlice = createSlice({
               }
             }
           }          
-        state.cart.quantity ++
-        
-      //localStorage.setItem('itemCart', JSON.stringify(state.cart.products))     
+        state.cart.quantity ++        
+      localStorage.setItem('cart', JSON.stringify(state.cart))     
     },
+
 
     setQuantityProductInCart(
       state,
       action: PayloadAction<setQuantityInCart>) {
         const products: ProductInCart[] = state.cart.products        
         const existingProductIndex: number = products.findIndex((value) =>{
-          return value.product.id === action.payload.product.id
+          return value.product.id === action.payload.product.id &&
+          value.product.selectedColor === action.payload.product.selectedColor &&
+          value.product.selectedCopacity === action.payload.product.selectedCopacity &&
+          value.product.selectedSize === action.payload.product.selectedSize
         })
         if(action.payload.operator === '+') {
         products[existingProductIndex].quantityProduct = products[existingProductIndex].quantityProduct + 1
@@ -181,24 +183,21 @@ export const dataSlice = createSlice({
           } 
           products[0] ? state.cart.products = [ ...products] : state.cart.products = initialState.cart.products
         state.cart.quantity --        
-        }       
-      }
+        } 
+        localStorage.setItem('cart', JSON.stringify(state.cart))       
+      },
+      
 
-    /*
-    [ ...products.filter(el => el.product.id === products[existingProductIndex].product.id)]
-
-    removeWeatherCard(state, action: PayloadAction<{id: number}>){
-      state.weathers = [...state.weathers.filter(el => el.id !== action.payload.id)]
-      localStorage.setItem('weathers', JSON.stringify(state.weathers))
-    },
-    setWeathersFromLS(state, action: PayloadAction<{ weathers: Weather[] }>){
-      state.weathers = action.payload.weathers
-    }*/
+      setCartFromLS(state) {
+        const cartFromLS: string | null = localStorage.getItem('cart')
+        const parsedCart: Cart = cartFromLS ? JSON.parse(cartFromLS) : state.cart
+        state.cart = parsedCart
+      }   
   },
 });
 
 export const { setCategory, setCategoriesNames, 
-  setCategoryName, setProduct, 
+   setProduct, setCartFromLS,
   setCartItems, setQuantityProductInCart, 
   setCurrency, setCurrentCurrency, 
   setTottalCart, setSelectedAttribute, } = dataSlice.actions;

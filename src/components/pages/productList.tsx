@@ -38,6 +38,7 @@ class ProductList extends React.Component<PropsProductList> {
 
   render() {
     //console.log("productList", this.props);
+
     return (
       <Wrapper>
         <CategoryName>{this.props.categoryName}</CategoryName>
@@ -68,7 +69,6 @@ const mapStateToProps = (state: Data) => ({
   inputName: state.categoryInputName,
   productInCart: state.cart.products,
   currentCurrency: state.currentCurrency,
-  name: "tech",
 });
 
 let WithUrlProductList = withHocList(ProductList);

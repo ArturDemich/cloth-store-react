@@ -3,7 +3,7 @@ import { apolloClient } from "../graphql";
 import { Categories, Category, ProductInputId, CategoryInput, Product, Currency } from "../storeg/interfaces";
 import { GET_CATEGORIES_NAME, GET_CATEGORY, GET_CURRENCY, GET_PRODUCT } from "./queries";
 
-
+ 
 export class DataService {
   static  getCategory(name: string ): Promise<ApolloQueryResult<any>> {    
    return  apolloClient.query<CategoryInput>({

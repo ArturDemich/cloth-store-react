@@ -42,7 +42,7 @@ export interface PropsProductList {
     currentCurrency: Currency
     getCategoryThunk: (payload: string) => void
     inputName: string
-    name: string
+    categoriesName: string
     params: {categoryName: string}
     productInCart: ProductInCart[]
     products:Product[]

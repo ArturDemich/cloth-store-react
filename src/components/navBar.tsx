@@ -10,10 +10,10 @@ import {
 import { link } from "../styles/navBar.styles";
 import brandIcon from "../styles/icon/brandIcon.svg";
 import emptyCart from "../styles/icon/emptyCart.svg";
-import { NavLink, Outlet } from "react-router-dom";
+import { Navigate, NavLink, Outlet } from "react-router-dom";
 import { connect } from "react-redux";
 import { getCategoriesNameThunk } from "../storeg/thunks";
-import { setTottalCart } from "../storeg/dataSlice";
+import { setTottalCart, setCartFromLS } from "../storeg/dataSlice";
 import { Categories, Data } from "../storeg/interfaces";
 import { withHocNavBar } from "./hocs/navBarHoc";
 import MiniCart from "./miniCart";
@@ -26,10 +26,12 @@ class NavBar extends React.Component<PropsNavBar, StateNavBar> {
     super(props);
     this.state = {
       showMiniCart: false,
+      loged: false,
     };
   }
   componentDidMount() {
     this.props.getCategoriesNameThunk();
+    this.props.setCartFromLS();
   }
 
   componentDidUpdate(prevState: PropsNavBar) {
@@ -53,7 +55,9 @@ class NavBar extends React.Component<PropsNavBar, StateNavBar> {
           <NavigationBar>
             {this.props.categoriesName.map((elem: Categories) => (
               <NavLink style={link} key={elem.name} to={`/${elem.name}`}>
-                <Button>{elem.name}</Button>
+                <Button onClick={() => this.setState({ loged: true })}>
+                  {elem.name}
+                </Button>
               </NavLink>
             ))}
           </NavigationBar>
@@ -101,4 +105,5 @@ let mapStateToProps = (state: Data) => ({
 export default connect(mapStateToProps, {
   getCategoriesNameThunk,
   setTottalCart,
+  setCartFromLS,
 })(NavBar);

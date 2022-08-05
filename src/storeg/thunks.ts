@@ -29,7 +29,7 @@ export const getCategoryThunk = (payload: string) => async (dispatch: AppDispatc
       } catch (error) {
         console.log(error);
       }
-  }
+  } 
 
 
   export const getCurrencyThunk = () => async (dispatch: AppDispatch) => {
