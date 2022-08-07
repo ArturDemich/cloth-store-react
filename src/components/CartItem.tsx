@@ -33,7 +33,6 @@ class CartItem extends React.Component<PropsCartItem, StateCartItem> {
     };
   }
   render() {
-    console.log("cartItem", this.props);
     return (
       <WrapperItemCart>
         <AtributeBloc>

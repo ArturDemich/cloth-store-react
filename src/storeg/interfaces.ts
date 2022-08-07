@@ -55,7 +55,6 @@ export interface Data {
     product: Product
     currencies: Currency[]
     currentCurrency: Currency
-    categoryInputName: string  
     cart: Cart
   };
 

@@ -22,7 +22,6 @@ class CartPage extends React.Component<PropsCartPage> {
     return this.keyCount++;
   }
   render() {
-    //console.log("props", this.props);
     return (
       <Wrapper>
         <Title>Cart</Title>

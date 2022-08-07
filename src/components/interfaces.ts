@@ -4,7 +4,6 @@ import { Attribute, AttributeSet, Categories, Currency, Price, Product, ProductI
 
 export interface PropsNavBar {
 categoriesName: Categories[]
-categoruInputName: string
 currentCurrency: string
 getCategoriesNameThunk: () => void
 quantityInCart: number
@@ -13,8 +12,7 @@ setCartFromLS: () => void
 }
 
 export interface StateNavBar {
-    showMiniCart: boolean
-    loged: boolean
+    showMiniCart: boolean    
 }
 
 export interface PropsProductCard {

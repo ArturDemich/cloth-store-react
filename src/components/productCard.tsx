@@ -13,7 +13,6 @@ import { PropsProductCard } from "./interfaces";
 
 class ProductCard extends React.Component<PropsProductCard> {
   render() {
-    //console.log(this.props);
     return (
       <Wrapper
         theme={

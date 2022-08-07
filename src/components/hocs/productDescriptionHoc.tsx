@@ -1,31 +1,32 @@
 import React from "react";
 import { useParams } from "react-router";
+import { Attribute, AttributeSet } from "../../storeg/interfaces";
+import { PropsDescription } from "../pages/interfaces";
+import { PropsCartItem, PropsMiniCartItem } from "../interfaces";
 
 export const withHocDescription = (WrappedComponent: any) => (props: any) => {
   const params = useParams();
 
-  const color: any = [];
-  let colorName: any = "";
+  const color: Attribute[] = [];
+  let colorName: string = "";
 
-  const size: any = [];
-  let sizeName: any = "";
+  const size: Attribute[] = [];
+  let sizeName: string = "";
 
-  const capacity: any = [];
+  const capacity: Attribute[] = [];
   let capacityName: string = "";
 
-  console.log("hoc", props);
-
-  function checkProps(data: any) {
-    data.map((elem: any) => {
+  function checkProps(data: AttributeSet[]) {
+    data.map((elem: AttributeSet) => {
       if (elem.name == "Capacity") {
         capacityName = "Capacity";
-        elem.items.map((el: any) => capacity.push(el));
+        elem.items.map((el: Attribute) => capacity.push(el));
       } else if (elem.name == "Color") {
         colorName = "Color";
-        elem.items.map((el: any) => color.push(el));
+        elem.items.map((el: Attribute) => color.push(el));
       } else if (elem.name == "Size") {
         sizeName = "Size";
-        elem.items.map((el: any) => size.push(el));
+        elem.items.map((el: Attribute) => size.push(el));
       }
     });
   }

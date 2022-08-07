@@ -27,7 +27,6 @@ class MiniCart extends React.Component<PropsMiniCart> {
     return this.keyCount++;
   }
   render() {
-    // console.log(this.props);
     return (
       <Wrapper>
         <Title>My Bag, {this.props.quantity} items </Title>

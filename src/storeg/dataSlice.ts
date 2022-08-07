@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FromAttribute } from '../components/enums';
-import ProductCard from '../components/productCard';
-import { ActionAttribute, Cart, Categories, Category, CategoryName, Currency, Data, Product, ProductInCart, setQuantityInCart } from './interfaces';
+import { ActionAttribute, Cart, Categories, Category, Currency, Data, Product, ProductInCart, setQuantityInCart } from './interfaces';
 
 
 
@@ -31,7 +30,6 @@ const initialState: Data = {
     symbol: '',
     label: '',
   },
-  categoryInputName: '',
   cart: {
     products: [{
       product: {
@@ -64,15 +62,13 @@ export const dataSlice = createSlice({
     setCategory(
       state,
       action: PayloadAction<Category>) {        
-      state.category = action.payload
-      //console.log('sliceCategory', action.payload)     
+      state.category = action.payload          
     },
 
     setCategoriesNames(
       state,
-      action: PayloadAction<Categories[]>) {        
-      state.categories = action.payload
-     // console.log('slice', action.payload)      
+      action: PayloadAction<{categories: Categories[]}>) {        
+      state.categories = action.payload.categories      
     },
 
     setSelectedAttribute(
@@ -88,35 +84,25 @@ export const dataSlice = createSlice({
     },
     
 
-    setCurrency(state, action: PayloadAction<Currency[]>) {
-      //console.log('sliceCurrency', action.payload)
-      state.currencies = action.payload
-      state.currentCurrency = action.payload[0]
+    setCurrency(state, action: PayloadAction<{currencies: Currency[]}>) {     
+      state.currencies = action.payload.currencies
+      state.currentCurrency = action.payload.currencies[0]
     },
 
     setCurrentCurrency(state, action: PayloadAction<Currency>) {      
-      state.currentCurrency = action.payload      
-      //console.log('sliceCCurrency', state.currentCurrency)
-    },
-
-   /*  setCategoryName(
-      state,
-      action: PayloadAction<Data['categoryInputName']>) {        
-      state.categoryInputName = action.payload
-      //console.log('sliceName', state.categoryInputName)      
-    }, */
+      state.currentCurrency = action.payload            
+    },  
 
     
     setProduct(
       state,
       action: PayloadAction<Product>) {        
-      state.product = action.payload          
-      //console.log('sliceProduct', action.payload)      
+      state.product = action.payload                     
     },
 
     setTottalCart(
       state,
-      action: PayloadAction<any>) {
+      action: PayloadAction<string>) {
         const products: ProductInCart[] = state.cart.products
         state.cart.tottal = 0
         

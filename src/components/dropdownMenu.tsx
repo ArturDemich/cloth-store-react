@@ -3,7 +3,6 @@ import { getCurrencyThunk } from "../storeg/thunks";
 import { setCurrentCurrency } from "../storeg/dataSlice";
 import UpArrow from "../styles/icon/UpArrow.svg";
 import DownArrow from "../styles/icon/DownArrow.svg";
-import $ from "../styles/icon/$.svg";
 import {
   Arrow,
   Dropdown,
@@ -32,7 +31,6 @@ class DropdownMenu extends React.Component<
   }
 
   render() {
-    //console.log("props", this.props);
     return (
       <Dropdown>
         <DropdownButton

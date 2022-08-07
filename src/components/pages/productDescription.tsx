@@ -46,7 +46,6 @@ class ProductDescription extends React.Component<
   parse = require("html-react-parser");
 
   render() {
-    console.log("props", this.props);
     return (
       <Wrapper>
         <Images>

@@ -20,9 +20,8 @@ export const getCategoryThunk = (payload: string) => async (dispatch: AppDispatc
   export const getCategoriesNameThunk = () => async (dispatch: AppDispatch) => {
     try {     
         const {data} = await DataService.getCategories(); 
-        if (data) {    
-            console.log('thunkNames', data.categories[0].name)       
-          dispatch(setCategoriesNames(data.categories));
+        if (data) {         
+          dispatch(setCategoriesNames(data));
         } else {
           console.log('Something went wrong!')
         }
@@ -35,9 +34,8 @@ export const getCategoryThunk = (payload: string) => async (dispatch: AppDispatc
   export const getCurrencyThunk = () => async (dispatch: AppDispatch) => {
     try {     
         const {data} = await DataService.getCurrencies(); 
-        if (data) {    
-            //console.log('thunkCurrency', data.currencies)       
-          dispatch(setCurrency(data.currencies));
+        if (data) {        
+          dispatch(setCurrency(data));
         } else {
           console.log('Something went wrong!')
         }
@@ -49,8 +47,7 @@ export const getCategoryThunk = (payload: string) => async (dispatch: AppDispatc
   export const getProductThunk = (payload: string) => async (dispatch: AppDispatch) => {
     try {     
         const {data} = await DataService.getProduct(payload); 
-        if (data) {           
-          console.log('productThunk', data.product)
+        if (data) { 
           dispatch(setProduct(data.product));
         } else {
           console.log('Something went wrong!')

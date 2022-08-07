@@ -23,7 +23,6 @@ import { PropsMiniCartItem } from "./interfaces";
 
 class MiniCartItem extends React.Component<PropsMiniCartItem> {
   render() {
-    console.log("minicartItem", this.props);
     return (
       <WrapperItemCart>
         <AtributeBloc>
