@@ -1,6 +1,8 @@
 import React from "react";
 import {
   Action,
+  AttributeSizeWrap,
+  BrandName,
   Button,
   ButtonSize,
   Color,
@@ -12,8 +14,10 @@ import {
   PriceWrap,
   Size,
   TextStrong,
-  Title,
+  ProductName,
   Wrapper,
+  AttributeCopacityWrap,
+  AttributeColorWrap,
 } from "../../styles/productDescription.styles";
 import { connect } from "react-redux";
 import { Attribute, Data, Price } from "../../storeg/interfaces";
@@ -60,12 +64,12 @@ class ProductDescription extends React.Component<
         <MainImage theme={{ gallery: this.state.image }}></MainImage>
 
         <Action>
-          <Title>{this.props.name}</Title>
-          <p>{this.props.brand}</p>
+          <BrandName>{this.props.brand}</BrandName>
+          <ProductName>{this.props.name}</ProductName>
 
-          {this.props.size && (
-            <>
-              <TextStrong>{this.props.sizeName}</TextStrong>
+          {this.props.size[0] && (
+            <AttributeSizeWrap>
+              <TextStrong>{this.props.sizeName + ":"}</TextStrong>
               <Size>
                 {this.props.size.map((elem: Attribute) => (
                   <ButtonSize
@@ -86,11 +90,11 @@ class ProductDescription extends React.Component<
                   </ButtonSize>
                 ))}
               </Size>
-            </>
+            </AttributeSizeWrap>
           )}
-          {this.props.capacity && (
-            <>
-              <TextStrong>{this.props.capacityName}</TextStrong>
+          {this.props.capacity[0] && (
+            <AttributeCopacityWrap>
+              <TextStrong>{this.props.capacityName + ":"}</TextStrong>
               <Size>
                 {this.props.capacity.map((elem: Attribute) => (
                   <ButtonSize
@@ -103,7 +107,7 @@ class ProductDescription extends React.Component<
                     onClick={() =>
                       this.props.setSelectedAttribute({
                         attributId: elem.id,
-                        name: FromAttribute.copacity,
+                        name: FromAttribute.capacity,
                       })
                     }
                   >
@@ -111,38 +115,39 @@ class ProductDescription extends React.Component<
                   </ButtonSize>
                 ))}
               </Size>
-            </>
+            </AttributeCopacityWrap>
           )}
 
-          {this.props.color && (
-            <>
-              <TextStrong>{this.props.colorName}</TextStrong>
+          {this.props.color[0] && (
+            <AttributeColorWrap>
+              <TextStrong>{this.props.colorName + ":"}</TextStrong>
               <Color>
                 {this.props.color.map((elem: Attribute) => (
                   <ColorSquare
                     key={elem.id}
                     theme={
-                      this.props.selectedColor === elem.id
+                      this.props.selectedColor === elem.value
                         ? { main: elem.value, border: "3px solid #5ECE7B" }
                         : { main: elem.value }
                     }
                     onClick={() =>
                       this.props.setSelectedAttribute({
-                        attributId: elem.id,
+                        attributId: elem.value,
                         name: FromAttribute.color,
                       })
                     }
                   />
                 ))}
               </Color>
-            </>
+            </AttributeColorWrap>
           )}
 
           <TextStrong>Price:</TextStrong>
           {this.props.prices.map((el: Price) =>
             el.currency.label === this.props.currency ? (
               <PriceWrap key={el.currency.label}>
-                {el.currency.symbol} {el.amount}
+                {el.currency.symbol}
+                {el.amount}
               </PriceWrap>
             ) : null
           )}

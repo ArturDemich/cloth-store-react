@@ -41,11 +41,9 @@ left: 929px;
 top: 160px;
 `
 
-export const Title = styled.div`
+export const BrandName = styled.div`
 width: 292px;
 height: 27px;
-left: 929px;
-top: 160px;
 font-family: 'Raleway';
 font-style: normal;
 font-weight: 600;
@@ -55,6 +53,18 @@ display: flex;
 align-items: center;
 color: #1D1F22;
 text-transform: capitalize;
+`
+
+export const ProductName = styled.div`
+font-family: 'Raleway';
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 27px;
+color: #1D1F22;
+text-transform: capitalize;
+margin-top: 16px;
+margin-bottom: 33px;
 `
 
 export const TextStrong = styled.div`
@@ -94,6 +104,7 @@ export const Size = styled.div`
 display: flex;
 flex-direction: row;
 text-transform: uppercase;
+margin-top: 8px;
 `
 
 export const ButtonSize = styled.button`
@@ -120,13 +131,15 @@ ButtonSize.defaultProps = {
 export const Color = styled.div`
 display: flex;
 flex-direction: row;
+margin-top: 10px;
 `
 
 export const ColorSquare = styled.button`
 width: 32px;
 height: 32px;
 background: ${props => props.theme.main};
-margin: 2px;
+margin-top: 2px;
+margin-right: 8px;
 cursor: pointer;
 border: ${props => props.theme.border};
 `
@@ -161,3 +174,14 @@ color: #1D1F22;
 margin-top: 2rem;
 `
 
+export const AttributeSizeWrap = styled.div`
+margin-bottom: 14px;
+`
+
+export const AttributeCopacityWrap = styled.div`
+margin-bottom: 14px;
+`
+
+export const AttributeColorWrap = styled.div`
+margin-bottom: 28px;
+`

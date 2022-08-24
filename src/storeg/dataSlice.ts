@@ -19,7 +19,6 @@ const initialState: Data = {
     selectedColor: '',
     selectedSize: '',
     selectedCopacity: '',
-        
   },
   category: {
     name: '',
@@ -31,24 +30,7 @@ const initialState: Data = {
     label: '',
   },
   cart: {
-    products: [{
-      product: {
-        id: '',
-        name: '',
-        inStock: true,
-        gallery: [''],
-        description: '',
-        category: '',
-        brand: '',
-        attributes: [],
-        prices: [],
-        selectedColor: '',
-        selectedSize: '',
-        selectedCopacity: '',
-                
-      },
-      quantityProduct: 0
-    }],    
+    products: [],    
     quantity: 0,
     tottal: 0,
   }
@@ -71,16 +53,29 @@ export const dataSlice = createSlice({
       state.categories = action.payload.categories      
     },
 
+    setDefaultAttribute(state, action: PayloadAction<Product>){
+      state.product = {...action.payload}
+      action.payload.attributes.forEach((elem) => {        
+        if(elem.name === FromAttribute.capacity) {   
+          state.product.selectedCopacity = elem.items[0].value
+        }else if(elem.name === FromAttribute.size) {
+          state.product.selectedSize = elem.items[0].value
+        }else if(elem.name === FromAttribute.color) {
+          state.product.selectedColor = elem.items[0].value
+        }               
+      })               
+    },
+
     setSelectedAttribute(
       state,
       action: PayloadAction<ActionAttribute>) {   
-        if(action.payload.name === FromAttribute.copacity) {
+        if(action.payload.name === FromAttribute.capacity) {
           state.product.selectedCopacity = action.payload.attributId
         }else if(action.payload.name === FromAttribute.color) {
           state.product.selectedColor = action.payload.attributId
         } else if(action.payload.name === FromAttribute.size) {
           state.product.selectedSize = action.payload.attributId
-        }         
+        }               
     },
     
 
@@ -118,29 +113,28 @@ export const dataSlice = createSlice({
 
     setCartItems(
       state,
-      action: PayloadAction<ProductInCart>) {        
+      action: PayloadAction<ProductInCart>) {           
+        if((action.payload.product.attributes[0] == undefined)) {          
+        } else if(!action.payload.product.selectedColor ||           
+          (!action.payload.product.selectedSize && !action.payload.product.selectedCopacity)) {
+            return
+          }  
+      
         const products: ProductInCart[] = state.cart.products        
-        const existingProductIndex: number = products.findIndex((value) =>{
-          return value.product.id === action.payload.product.id
-        })
-        if(existingProductIndex === -1 && !state.cart.products[0].product.id) {                    
+        const existingProductIndex: number = products.findIndex((value) =>
+           value.product.id === action.payload.product.id && 
+           value.product.selectedColor === action.payload.product.selectedColor && 
+           value.product.selectedCopacity === action.payload.product.selectedCopacity &&
+           value.product.selectedSize === action.payload.product.selectedSize
+        )
+
+        if(existingProductIndex === -1 && !state.cart.products.length) {                    
             state.cart.products = [action.payload] 
-          } else if(existingProductIndex === -1 && state.cart.products[0].product.id) {
+          } else if(existingProductIndex === -1 && state.cart.products.length) {
             state.cart.products = [...products, action.payload] 
           } else {
-            for( let elem of products) {
-              if(elem.product.id === action.payload.product.id &&
-                elem.product.selectedColor === action.payload.product.selectedColor) {
-                  if(elem.product.selectedCopacity === action.payload.product.selectedCopacity) {
-                    if(elem.product.selectedSize === action.payload.product.selectedSize) {
-                      elem.quantityProduct = elem.quantityProduct + 1
-                      state.cart.products = [ ...products]
-                    }
-                  }
-              } else {
-                state.cart.products = [...products, action.payload]
-              }
-            }
+             const item = products[existingProductIndex]   
+             item.quantityProduct++
           }          
         state.cart.quantity ++        
       localStorage.setItem('cart', JSON.stringify(state.cart))     
@@ -186,5 +180,6 @@ export const { setCategory, setCategoriesNames,
    setProduct, setCartFromLS,
   setCartItems, setQuantityProductInCart, 
   setCurrency, setCurrentCurrency, 
-  setTottalCart, setSelectedAttribute, } = dataSlice.actions;
+  setTottalCart, setSelectedAttribute,
+  setDefaultAttribute } = dataSlice.actions;
 export default dataSlice.reducer;

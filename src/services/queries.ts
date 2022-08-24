@@ -1,5 +1,4 @@
 import gql from "graphql-tag";
-import {CategoryInput} from "../storeg/interfaces"
 
 export const GET_CATEGORY = gql`
 query getCategory($input: CategoryInput) {

@@ -12,7 +12,6 @@ export const Header = styled.div`
 display: flex;
 background-color: #FFFFFF;
 height: 80px;
-margin-bottom: 1rem;
 justify-content: space-between;
 width: auto;
 align-items: center;

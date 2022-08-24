@@ -27,11 +27,8 @@ export const Button = styled.button`
 display: flex;
 flex-direction: column;
 align-items: center;
-padding: 16px 32px;
 width: 279px;
 height: 43px;
-left: 929px;
-top: 560px;
 background: #5ECE7B;
 border: 0;
 font-family: 'Raleway';
@@ -41,17 +38,18 @@ font-size: 16px;
 line-height: 120%;
 color: #FFFFFF;
 text-transform: uppercase;
-margin-top: 1rem;
+margin-top: 16px;
+justify-content: center;
 `
 
 export const TextStrong = styled.div`
-font-family: 'Roboto Condensed';
+font-family: 'Raleway';
 font-style: normal;
 font-weight: 700;
-font-size: 18px;
-line-height: 18px;
+font-size: 24px;
+line-height: 24px;
 color: #1D1F22;
-padding-top: 1rem;
+padding-top: 8px;
 text-transform: uppercase;
 `
 
@@ -62,6 +60,21 @@ flex-direction: column;
 align-items: flex-start;
 padding: 0px;
 width: 279px;
-height: 159px;
+height: auto;
+margin-top: 24px;
+`
+export const InfoRow = styled.div`
+display: flex;
+flex-direction: row;
+`
+
+export const TextInfo = styled.div`
+font-family: 'Raleway';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 28px;
+padding-top: 8px;
+width: 105px;
 
 `

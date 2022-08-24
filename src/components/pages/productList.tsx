@@ -46,10 +46,9 @@ class ProductList extends React.Component<PropsProductList> {
               style={link}
               key={elem.id.toString()}
               to={`/product-description/${elem.id}`}
-              state={elem}
             >
               <ProductCard
-                {...elem}
+                product={elem}
                 inCart={this.checkCart(elem.id)}
                 currency={this.props.currentCurrency}
               />

@@ -1,5 +1,5 @@
 export enum FromAttribute {
-    size = "size",
-    color = "color",  
-    copacity = "copacity",
+    size = "Size",
+    color = "Color",  
+    capacity = "Capacity",
 }

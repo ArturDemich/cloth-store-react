@@ -25,6 +25,7 @@ class NavBar extends React.Component<PropsNavBar, StateNavBar> {
     super(props);
     this.state = {
       showMiniCart: false,
+      showCurrency: false,
     };
   }
   componentDidMount() {
@@ -44,6 +45,24 @@ class NavBar extends React.Component<PropsNavBar, StateNavBar> {
   renderBackdrop = (props: any) => <Backdrop {...props} />;
   hideModal = () => this.setState({ showMiniCart: false });
 
+  openMiniCart = () => {
+    if (this.state.showCurrency) {
+      this.setState({ showCurrency: false });
+      this.setState({ showMiniCart: true });
+    } else {
+      this.setState({ showMiniCart: true });
+    }
+  };
+
+  openCurrency = () => {
+    if (this.state.showMiniCart) {
+      this.setState({ showMiniCart: false });
+      this.setState({ showCurrency: !this.state.showCurrency });
+    } else {
+      this.setState({ showCurrency: !this.state.showCurrency });
+    }
+  };
+
   render() {
     return (
       <>
@@ -58,7 +77,18 @@ class NavBar extends React.Component<PropsNavBar, StateNavBar> {
 
           <img src={brandIcon} alt="brandIcon" width="41" height="41" />
           <Actions>
-            <DropdownMenu />
+            <DropdownMenu
+              openCurrency={this.openCurrency}
+              showCurrency={this.state.showCurrency}
+            />
+            <ModalMiniCart
+              show={this.state.showMiniCart}
+              renderBackdrop={this.renderBackdrop}
+              onHide={this.hideModal}
+              onShow={this.openMiniCart}
+            >
+              <MiniCart hideModal={this.hideModal} />
+            </ModalMiniCart>
 
             <ImageCart
               theme={{ gallery: emptyCart }}
@@ -68,14 +98,6 @@ class NavBar extends React.Component<PropsNavBar, StateNavBar> {
                 <BadgeCart>{this.props.quantityInCart}</BadgeCart>
               )}
             </ImageCart>
-
-            <ModalMiniCart
-              show={this.state.showMiniCart}
-              renderBackdrop={this.renderBackdrop}
-              onHide={this.hideModal}
-            >
-              <MiniCart hideModal={this.hideModal} />
-            </ModalMiniCart>
           </Actions>
         </Header>
 

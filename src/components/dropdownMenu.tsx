@@ -33,20 +33,20 @@ class DropdownMenu extends React.Component<
   render() {
     return (
       <Dropdown>
-        <DropdownButton
-          onClick={() => this.setState({ isActive: !this.state.isActive })}
-        >
+        <DropdownButton onClick={this.props.openCurrency}>
           <LabelCurrencies>{this.props.currentCurrency.symbol}</LabelCurrencies>
-          <Arrow theme={{ arrow: this.state.isActive ? UpArrow : DownArrow }} />
+          <Arrow
+            theme={{ arrow: this.props.showCurrency ? UpArrow : DownArrow }}
+          />
         </DropdownButton>
-        {this.state.isActive && (
+        {this.props.showCurrency && (
           <DropdownContetn>
             {this.props.currencies.map((elem: Currency) => (
               <DropdownItem
                 key={elem.label}
                 onClick={() =>
                   this.props.setCurrentCurrency(elem) &&
-                  this.setState({ isActive: !this.state.isActive })
+                  this.props.openCurrency()
                 }
               >
                 {elem.symbol} {elem.label}

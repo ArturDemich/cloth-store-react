@@ -9,6 +9,7 @@ import {
   ButtonBlock,
   Infoblock,
   ScrollWrap,
+  TextQuantity,
   TextStrong,
   Title,
   Wrapper,
@@ -29,14 +30,17 @@ class MiniCart extends React.Component<PropsMiniCart> {
   render() {
     return (
       <Wrapper>
-        <Title>My Bag, {this.props.quantity} items </Title>
+        <Title>
+          My Bag,
+          <TextQuantity> {this.props.quantity} items</TextQuantity>
+        </Title>
         <ScrollWrap>
-          {this.props.cartItem.map((elem: ProductInCart) =>
-            elem.product.id ? (
+          {this.props.cartItem.length ? (
+            this.props.cartItem.map((elem: ProductInCart) => (
               <MiniCartItem key={this.getKey()} {...elem} />
-            ) : (
-              <Title key="empty">Your Cart is empty!</Title>
-            )
+            ))
+          ) : (
+            <Title key="empty">Your Cart is empty!</Title>
           )}
         </ScrollWrap>
 

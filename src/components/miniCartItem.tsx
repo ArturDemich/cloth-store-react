@@ -27,20 +27,21 @@ class MiniCartItem extends React.Component<PropsMiniCartItem> {
       <WrapperItemCart>
         <AtributeBloc>
           <Title>
-            {this.props.product.name} <br></br> {this.props.product.brand}
+            {this.props.product.brand} <br></br> {this.props.product.name}
           </Title>
 
           {this.props.product.prices.map((el: Price) =>
             el.currency.label === this.props.currency ? (
               <PriceWrap key={el.currency.label}>
-                {el.currency.symbol} {el.amount}
+                {el.currency.symbol}
+                {el.amount}
               </PriceWrap>
             ) : null
           )}
 
-          {this.props.size && (
+          {this.props.size[0] && (
             <>
-              <Text>{this.props.sizeName}</Text>
+              <Text>{this.props.sizeName + ":"}</Text>
               <Size>
                 {this.props.size.map((elem: Attribute) => (
                   <ButtonSize
@@ -57,9 +58,9 @@ class MiniCartItem extends React.Component<PropsMiniCartItem> {
               </Size>
             </>
           )}
-          {this.props.capacity && (
+          {this.props.capacity[0] && (
             <>
-              <Text>{this.props.capacityName}</Text>
+              <Text>{this.props.capacityName + ":"}</Text>
               <Size>
                 {this.props.capacity.map((elem: Attribute) => (
                   <ButtonSize
@@ -77,15 +78,15 @@ class MiniCartItem extends React.Component<PropsMiniCartItem> {
             </>
           )}
 
-          {this.props.color && (
+          {this.props.color[0] && (
             <>
-              <Text>{this.props.colorName}</Text>
+              <Text>{this.props.colorName + ":"}</Text>
               <Color>
                 {this.props.color.map((elem: Attribute) => (
                   <ColorSquare
                     key={elem.id}
                     theme={
-                      this.props.product.selectedColor === elem.id
+                      this.props.product.selectedColor === elem.value
                         ? { main: elem.value, border: "3px solid #5ECE7B" }
                         : { main: elem.value }
                     }

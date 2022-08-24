@@ -1,5 +1,4 @@
-import { type } from "os"
-import { Attribute, AttributeSet, Categories, Currency, Price, Product, ProductInCart, setQuantityInCart } from "../storeg/interfaces"
+import { Attribute, Categories, Currency, Product, ProductInCart, setQuantityInCart } from "../storeg/interfaces"
 
 
 export interface PropsNavBar {
@@ -12,23 +11,22 @@ setCartFromLS: () => void
 }
 
 export interface StateNavBar {
-    showMiniCart: boolean    
+    showMiniCart: boolean 
+    showCurrency: boolean   
 }
 
 export interface PropsProductCard {
-attributes: AttributeSet[]
-brand: string
-category: string
 currency: Currency
-description: string
-gallery: string[]
-id: string
 inCart: boolean
-inStock: boolean
-name: string
-prices: Price[]
+setCartItems: (action: ProductInCart) => void
+setDefaultAttribute: (action: Product) => void
+product: Product
+productState: Product
 }
 
+export interface StateProductCard {
+    hover: boolean
+}
  
 export interface PropsMiniCartItem {
 capacity: Attribute[]
@@ -58,8 +56,10 @@ tottal: number
 export interface PropsDropdownMenu {
 currencies: Currency[]
 currentCurrency: Currency
+showCurrency: boolean
 getCurrencyThunk: () => void
 setCurrentCurrency: (action: Currency) => any
+openCurrency: () => void
 }
 
 export interface StateDropdownMenu {

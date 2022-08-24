@@ -1,4 +1,3 @@
-import { url } from "inspector"
 import styled from "styled-components"
 
 
@@ -51,6 +50,7 @@ cursor: pointer;
 display: flex;
 justify-content: center;
 align-items: center;
+border: 1px solid #1D1F22;
 `
 export const Images = styled.div`
 display: flex;
@@ -76,7 +76,8 @@ align-items: center;
 color: #1D1F22;
 text-transform: capitalize;
 margin-right: 4px;
-margin-bottom: 4px;
+margin-bottom: 10px;
+
 `
 
 export const PriceWrap = styled.div`
@@ -122,7 +123,6 @@ align-items: center;
 background: ${props => props.theme.background};
 color: ${props => props.theme.color};
 text-transform: uppercase;
-cursor: pointer;
 `
 ButtonSize.defaultProps = {    
     theme: {
@@ -143,7 +143,6 @@ height: 16px;
 background: ${props => props.theme.main};
 border: ${props => props.theme.border};
 margin-right: 8px;
-cursor: pointer;
 `
 ColorSquare.defaultProps = {
     theme:{

@@ -56,4 +56,3 @@ export const getCategoryThunk = (payload: string) => async (dispatch: AppDispatc
         console.log(error);
       }
   }
-

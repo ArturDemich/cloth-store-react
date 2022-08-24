@@ -1,8 +1,5 @@
-import React from "react";
 import { useParams } from "react-router";
 import { Attribute, AttributeSet } from "../../storeg/interfaces";
-import { PropsDescription } from "../pages/interfaces";
-import { PropsCartItem, PropsMiniCartItem } from "../interfaces";
 
 export const withHocDescription = (WrappedComponent: any) => (props: any) => {
   const params = useParams();

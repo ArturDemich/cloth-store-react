@@ -15,13 +15,14 @@ import {
   RightArrow,
 } from "../styles/cartItem.styles";
 import {
+  BrandName,
   ButtonSize,
   Color,
   ColorSquare,
   PriceWrap,
   Size,
   TextStrong,
-  Title,
+  ProductName,
 } from "../styles/productDescription.styles";
 import { PropsCartItem, StateCartItem } from "./interfaces";
 
@@ -36,21 +37,21 @@ class CartItem extends React.Component<PropsCartItem, StateCartItem> {
     return (
       <WrapperItemCart>
         <AtributeBloc>
-          <Title>{this.props.product.name}</Title>
-          <p>{this.props.product.brand}</p>
+          <BrandName>{this.props.product.brand}</BrandName>
+          <ProductName>{this.props.product.name}</ProductName>
 
-          <TextStrong>Price:</TextStrong>
           {this.props.product.prices.map((el: Price) =>
             el.currency.label === this.props.currency ? (
               <PriceWrap key={el.currency.label}>
-                {el.currency.symbol} {el.amount}
+                {el.currency.symbol}
+                {el.amount}
               </PriceWrap>
             ) : null
           )}
 
-          {this.props.size && (
+          {this.props.size[0] && (
             <>
-              <TextStrong>{this.props.sizeName}</TextStrong>
+              <TextStrong>{this.props.sizeName + ":"}</TextStrong>
               <Size>
                 {this.props.size.map((elem: Attribute) => (
                   <ButtonSize
@@ -67,9 +68,9 @@ class CartItem extends React.Component<PropsCartItem, StateCartItem> {
               </Size>
             </>
           )}
-          {this.props.capacity && (
+          {this.props.capacity[0] && (
             <>
-              <TextStrong>{this.props.capacityName}</TextStrong>
+              <TextStrong>{this.props.capacityName + ":"}</TextStrong>
               <Size>
                 {this.props.capacity.map((elem: Attribute) => (
                   <ButtonSize
@@ -87,15 +88,15 @@ class CartItem extends React.Component<PropsCartItem, StateCartItem> {
             </>
           )}
 
-          {this.props.color && (
+          {this.props.color[0] && (
             <>
-              <TextStrong>{this.props.colorName}</TextStrong>
+              <TextStrong>{this.props.colorName + ":"}</TextStrong>
               <Color>
                 {this.props.color.map((elem: Attribute) => (
                   <ColorSquare
                     key={elem.id}
                     theme={
-                      this.props.product.selectedColor === elem.id
+                      this.props.product.selectedColor === elem.value
                         ? { main: elem.value, border: "3px solid #5ECE7B" }
                         : { main: elem.value }
                     }
@@ -132,7 +133,13 @@ class CartItem extends React.Component<PropsCartItem, StateCartItem> {
           </ItemActions>
 
           <Images
-            theme={{ gallery: this.props.product.gallery[this.state.index] }}
+            theme={{
+              gallery:
+                this.state.index >= 0 &&
+                this.state.index <= this.props.product.gallery.length
+                  ? this.props.product.gallery[this.state.index]
+                  : this.props.product.gallery[0],
+            }}
           >
             <LeftArrow
               onClick={() =>

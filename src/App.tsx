@@ -1,6 +1,5 @@
 import { ApolloProvider } from "@apollo/client";
 import React from "react";
-import { connect } from "react-redux";
 import { Route, Routes } from "react-router";
 import NavBar from "./components/navBar";
 import CartPage from "./components/pages/cartPage";
@@ -8,8 +7,6 @@ import ProductDescription from "./components/pages/productDescription";
 import ProductList from "./components/pages/productList";
 import { apolloClient } from "./graphql";
 import { Wrapper } from "./styles/app.stales";
-import { getCategoryThunk, getCategoriesNameThunk } from "./storeg/thunks";
-import { Data } from "./storeg/interfaces";
 
 class App extends React.Component {
   render() {
@@ -32,12 +29,4 @@ class App extends React.Component {
   }
 }
 
-let mapStateToProps = (state: Data) => ({
-  categoriesName: state.categories,
-  name: "all",
-});
-
-export default connect(mapStateToProps, {
-  getCategoryThunk,
-  getCategoriesNameThunk,
-})(App);
+export default App;
