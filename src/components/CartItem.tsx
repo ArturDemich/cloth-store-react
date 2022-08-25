@@ -23,6 +23,8 @@ import {
   Size,
   TextStrong,
   ProductName,
+  buttonSize,
+  colorSquare,
 } from "../styles/productDescription.styles";
 import { PropsCartItem, StateCartItem } from "./interfaces";
 
@@ -57,7 +59,10 @@ class CartItem extends React.Component<PropsCartItem, StateCartItem> {
                   <ButtonSize
                     theme={
                       this.props.product.selectedSize === elem.id
-                        ? { background: "#1D1F22", color: "#FFFFFF" }
+                        ? {
+                            background: buttonSize.background,
+                            color: buttonSize.color,
+                          }
                         : null
                     }
                     key={elem.id}
@@ -76,7 +81,10 @@ class CartItem extends React.Component<PropsCartItem, StateCartItem> {
                   <ButtonSize
                     theme={
                       this.props.product.selectedCopacity === elem.id
-                        ? { background: "#1D1F22", color: "#FFFFFF" }
+                        ? {
+                            background: buttonSize.background,
+                            color: buttonSize.color,
+                          }
                         : null
                     }
                     key={elem.id}
@@ -97,7 +105,7 @@ class CartItem extends React.Component<PropsCartItem, StateCartItem> {
                     key={elem.id}
                     theme={
                       this.props.product.selectedColor === elem.value
-                        ? { main: elem.value, border: "3px solid #5ECE7B" }
+                        ? { main: elem.value, border: colorSquare.border }
                         : { main: elem.value }
                     }
                   />

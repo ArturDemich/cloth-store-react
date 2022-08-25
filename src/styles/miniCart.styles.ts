@@ -88,6 +88,19 @@ color: ${props => props.theme.color};
 text-transform: uppercase;
 cursor: pointer;
 `
+Button.defaultProps = {
+  theme:{
+    background: "#FFFFFF",
+    color: "#1D1F22",
+    border: "1px solid #1D1F22",
+  }
+}
+export const theme = {
+  background: "#5ECE7B;", 
+  color: "#FFFFFF", 
+  border: "0",
+}
+
 
 export const TextStrong = styled.div`
 font-family: 'Roboto';

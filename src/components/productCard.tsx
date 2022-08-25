@@ -9,6 +9,7 @@ import {
   StockOut,
   Title,
   Wrapper,
+  wrapper,
 } from "../styles/productCard.styles";
 import { PropsProductCard, StateProductCard } from "./interfaces";
 import { setCartItems, setDefaultAttribute } from "../storeg/dataSlice";
@@ -34,7 +35,7 @@ class ProductCard extends React.Component<PropsProductCard, StateProductCard> {
       <Wrapper
         theme={
           this.props.inCart && {
-            main: "0px 4px 35px rgba(168, 172, 176, 0.19)",
+            main: wrapper.main,
           }
         }
         onMouseEnter={() => this.setState({ hover: true })}

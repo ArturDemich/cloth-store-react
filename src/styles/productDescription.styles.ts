@@ -127,6 +127,11 @@ ButtonSize.defaultProps = {
         color: "#1D1F22",
     }
 }
+export const buttonSize =  {    
+        background: "#1D1F22", 
+        color: "#FFFFFF"    
+}
+
 
 export const Color = styled.div`
 display: flex;
@@ -147,6 +152,9 @@ ColorSquare.defaultProps = {
     theme:{
         border: "none"
     }
+}
+export const colorSquare =  {    
+    border: "3px solid #5ECE7B"   
 }
 
 export const PriceWrap = styled.div`

@@ -12,9 +12,16 @@ width: 386px;
 height: 444px;
 background: #FFFFFF;
 margin-top: 3rem;
-box-shadow: ${props => props.theme.main} ;
-
+box-shadow: ${props => props.theme.main};
 `
+Wrapper.defaultProps = {
+    theme:{
+        main: "none",
+    }
+}
+export const wrapper = {
+    main: "0px 4px 35px rgba(168, 172, 176, 0.19)",
+}
 
 export const Content = styled.div`
 display: flex;

@@ -13,6 +13,7 @@ import {
   TextStrong,
   Title,
   Wrapper,
+  theme,
 } from "../styles/miniCart.styles";
 import MiniCartItem from "./miniCartItem";
 import { PropsMiniCart } from "./interfaces";
@@ -53,22 +54,9 @@ class MiniCart extends React.Component<PropsMiniCart> {
         </Infoblock>
         <ButtonBlock>
           <Link to="/product-cart" style={link}>
-            <Button
-              theme={{
-                background: "#FFFFFF",
-                color: "#1D1F22",
-                border: "1px solid #1D1F22",
-              }}
-              onClick={this.props.hideModal}
-            >
-              View Bag
-            </Button>
+            <Button onClick={this.props.hideModal}>View Bag</Button>
           </Link>
-          <Button
-            theme={{ background: "#5ECE7B;", color: "#FFFFFF", border: "0" }}
-          >
-            Check Out
-          </Button>
+          <Button theme={theme}>Check Out</Button>
         </ButtonBlock>
       </Wrapper>
     );

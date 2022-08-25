@@ -1,6 +1,10 @@
 html {
     max-width: max-content;
     margin: auto;
+    
+}
+body{
+    display: contents;
 }
 
 #root {

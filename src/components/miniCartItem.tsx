@@ -18,6 +18,8 @@ import {
   Size,
   Text,
   Title,
+  buttonSize,
+  colorSquare,
 } from "../styles/miniCartItem.styles";
 import { PropsMiniCartItem } from "./interfaces";
 
@@ -47,7 +49,10 @@ class MiniCartItem extends React.Component<PropsMiniCartItem> {
                   <ButtonSize
                     theme={
                       this.props.product.selectedSize === elem.id
-                        ? { background: "#1D1F22", color: "#FFFFFF" }
+                        ? {
+                            background: buttonSize.background,
+                            color: buttonSize.color,
+                          }
                         : null
                     }
                     key={elem.id}
@@ -66,7 +71,10 @@ class MiniCartItem extends React.Component<PropsMiniCartItem> {
                   <ButtonSize
                     theme={
                       this.props.product.selectedCopacity === elem.id
-                        ? { background: "#1D1F22", color: "#FFFFFF" }
+                        ? {
+                            background: buttonSize.background,
+                            color: buttonSize.color,
+                          }
                         : null
                     }
                     key={elem.id}
@@ -87,7 +95,7 @@ class MiniCartItem extends React.Component<PropsMiniCartItem> {
                     key={elem.id}
                     theme={
                       this.props.product.selectedColor === elem.value
-                        ? { main: elem.value, border: "3px solid #5ECE7B" }
+                        ? { main: elem.value, border: colorSquare.border }
                         : { main: elem.value }
                     }
                   />

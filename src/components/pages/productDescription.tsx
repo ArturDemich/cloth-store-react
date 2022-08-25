@@ -18,6 +18,8 @@ import {
   Wrapper,
   AttributeCopacityWrap,
   AttributeColorWrap,
+  buttonSize,
+  colorSquare,
 } from "../../styles/productDescription.styles";
 import { connect } from "react-redux";
 import { Attribute, Data, Price } from "../../storeg/interfaces";
@@ -75,7 +77,10 @@ class ProductDescription extends React.Component<
                   <ButtonSize
                     theme={
                       this.props.selectedSize === elem.id
-                        ? { background: "#1D1F22", color: "#FFFFFF" }
+                        ? {
+                            background: buttonSize.background,
+                            color: buttonSize.color,
+                          }
                         : null
                     }
                     key={elem.id}
@@ -100,7 +105,10 @@ class ProductDescription extends React.Component<
                   <ButtonSize
                     theme={
                       this.props.selectedCopacity === elem.id
-                        ? { background: "#1D1F22", color: "#FFFFFF" }
+                        ? {
+                            background: buttonSize.background,
+                            color: buttonSize.color,
+                          }
                         : null
                     }
                     key={elem.id}
@@ -127,7 +135,7 @@ class ProductDescription extends React.Component<
                     key={elem.id}
                     theme={
                       this.props.selectedColor === elem.value
-                        ? { main: elem.value, border: "3px solid #5ECE7B" }
+                        ? { main: elem.value, border: colorSquare.border }
                         : { main: elem.value }
                     }
                     onClick={() =>
