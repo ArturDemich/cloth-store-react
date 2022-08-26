@@ -84,6 +84,7 @@ font-weight: 700;
 font-size: 14px;
 display: flex;
 align-content: center;
+align-items: center;
 justify-content: center;
 text-transform: uppercase;
 position: absolute;
