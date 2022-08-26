@@ -57,7 +57,7 @@ class ProductCard extends React.Component<PropsProductCard, StateProductCard> {
             {this.props.product.prices.map((el: Price) =>
               el.currency.label === this.props.currency.label ? (
                 <PriceWrap key={el.currency.label}>
-                  {el.currency.symbol} {el.amount}
+                  {el.currency.symbol}{el.amount}
                 </PriceWrap>
               ) : null
             )}
